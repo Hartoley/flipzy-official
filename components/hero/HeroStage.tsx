@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { heroSlides } from "./heroData";
 import useTypingText from "./useTypingText";
+
 import HeroCard from "./HeroCard";
 
 const AUTO_ADVANCE_MS = 5000; // FASTER SLIDE CHANGES
@@ -104,9 +105,9 @@ export default function HeroStage() {
                 </div>
               )}
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+              <h4 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
                 {typedTitle}
-              </h1>
+              </h4>
 
               {active.description && (
                 <p className="mt-4 text-base sm:text-lg opacity-90 max-w-lg">

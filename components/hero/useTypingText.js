@@ -1,20 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export default function useTypingText(text, speed = 30) {
+export default function useTypingText(text = "", speed = 30) {
     const [display, setDisplay] = useState("");
+    const indexRef = useRef(0);
+    const timeoutRef = useRef(null);
 
     useEffect(() => {
-        setDisplay(""); // restart typing when text changes
-        let i = 0;
+        setDisplay("");
+        indexRef.current = 0;
 
-        const interval = setInterval(() => {
-            setDisplay((prev) => prev + text.charAt(i));
-            i++;
+        // clear any previous timeout
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-            if (i >= text.length) clearInterval(interval);
-        }, speed);
+        const tick = () => {
+            const i = indexRef.current;
 
-        return () => clearInterval(interval);
+            if (i < text.length) {
+                setDisplay(text.slice(0, i + 1));
+                indexRef.current = i + 1;
+
+                timeoutRef.current = setTimeout(tick, speed);
+            } else {
+                timeoutRef.current = null;
+            }
+        };
+
+        tick(); // start immediately
+
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
     }, [text, speed]);
 
     return display;
