@@ -107,9 +107,9 @@ export default function HeroStage() {
         {/* ------------------- LEFT TEXT ------------------- */}
         <div
           className="absolute inset-0 z-10 flex items-center 
-                      px-6 sm:px-10 md:px-16 bottom-10 md:bottom-0"
+                      px-6 sm:px-10 md:px-16 bottom-10 md:mb-10"
         >
-          <div className="max-w-xl text-white">
+          <div className="max-[40vw] text-white">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id + "-text"}
@@ -124,7 +124,7 @@ export default function HeroStage() {
                   </div>
                 )}
 
-                <h4 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight">
+                <h4 className="text-3xl sm:text-4xl md:text-4xl font-extrabold leading-tight">
                   {typedTitle}
                 </h4>
 
