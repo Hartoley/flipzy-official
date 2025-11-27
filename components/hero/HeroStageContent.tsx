@@ -142,7 +142,7 @@ export default function HeroStageContent() {
         </AnimatePresence>
 
         {/* LEFT TEXT */}
-        <div className="absolute inset-0 z-10 flex items-center px-6 sm:px-10 md:px-16 bottom-24 md:bottom-0">
+        <div className="absolute inset-0 z-10 flex items-center px-6 sm:px-10 md:px-16 bottom-24 md:bottom-16">
           <div className="max-[40vw] text-white">
             <AnimatePresence mode="wait">
               <motion.div
