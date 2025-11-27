@@ -8,7 +8,7 @@ import useTypingText from "./useTypingText";
 import HeroCard from "./HeroCard";
 import Headers from "./Header";
 
-const AUTO_ADVANCE_MS = 5000; // FASTER SLIDE CHANGES
+const AUTO_ADVANCE_MS = 9000; // FASTER SLIDE CHANGES
 
 export default function HeroStage() {
   const total = heroSlides.length;
@@ -63,7 +63,7 @@ export default function HeroStage() {
     <>
       <Headers />
       <section
-        className="relative w-full h-[90vh] overflow-hidden bg-[#0A0F1F]"
+        className="relative w-full h-[95vh] overflow-hidden bg-[#0A0F1F]"
         style={{
           backgroundImage: `url(${previous.image})`,
           backgroundSize: "cover",
@@ -91,7 +91,7 @@ export default function HeroStage() {
         {/* ------------------- LEFT TEXT ------------------- */}
         <div
           className="absolute inset-0 z-10 flex items-center 
-                      px-6 sm:px-10 md:px-16"
+                      px-6 sm:px-10 md:px-16 bottom-20"
         >
           <div className="max-w-xl text-white">
             <AnimatePresence mode="wait">
@@ -108,7 +108,7 @@ export default function HeroStage() {
                   </div>
                 )}
 
-                <h4 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                <h4 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight">
                   {typedTitle}
                 </h4>
 
@@ -122,18 +122,18 @@ export default function HeroStage() {
                 <div className="mt-6 flex gap-4">
                   {/* Primary CTA */}
                   <button
-                    className="px-6 py-3 rounded-full font-semibold 
-               bg-[#ff6b2c] text-white shadow-lg 
-               hover:bg-[#fc9062] transition-all"
+                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full 
+             bg-[#ff6b2c] text-white shadow-lg 
+             hover:bg-[#fc9062] transition-all"
                   >
                     {active.cta1}
                   </button>
 
                   {/* Secondary CTA */}
                   <button
-                    className="px-6 py-3 rounded-full font-semibold text-white 
-               border border-white/40 backdrop-blur-md 
-               hover:bg-white/10 transition-all"
+                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full  text-white 
+             border border-white/40 backdrop-blur-md 
+             hover:bg-white/10 transition-all"
                   >
                     {active.cta2}
                   </button>

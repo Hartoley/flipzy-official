@@ -4,11 +4,11 @@ export default function FlipzyHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-transparent px-4 sm:px-8 py-4 flex items-center justify-between">
+    <header className="fixed bg-[#06090fa9] top-0 left-0 w-full z-50 backdrop-blur-md px-4 sm:px-8 py-4 flex items-center justify-between">
       {/* Logo */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         {/* Replace with your logo */}
-        <img src="/logo.png" alt="Flipzy Logo" className="h-8 w-auto" />
+        <img src="/images/logo.png" alt="Flipzy Logo" className="h-10 w-auto" />
         <span className="text-white text-xl font-semibold">Flipzy</span>
       </div>
 
@@ -71,11 +71,11 @@ export default function FlipzyHeader() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`md:hidden fixed top-0 right-0 h-full w-64 bg-black/80 backdrop-blur-xl text-white p-6 flex flex-col gap-6 transform transition-transform duration-300 ${
+        className={`md:hidden fixed right-0 h-full w-64 bg-black z-30 text-white p-6 flex flex-col gap-6 transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between bg-black  items-center mb-4">
           <span className="text-lg font-semibold">Menu</span>
           <button onClick={() => setMenuOpen(false)}>
             <svg

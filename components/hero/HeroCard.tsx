@@ -38,7 +38,7 @@ export default function HeroCard({ slide, indexInRail = 0 }: HeroCardProps) {
         <div className="text-white">
           {slide.subtitle && (
             <div className="text-[3px] sm:text-xs opacity-80 uppercase tracking-wider">
-              {slide.subtitle}
+              {/* {slide.subtitle} */}
             </div>
           )}
 
