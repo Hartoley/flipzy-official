@@ -18,11 +18,12 @@ export default function HeroStage() {
 
   useEffect(() => {
     if (isPaused) return;
-    timerRef.current = window.setInterval(() => {
+
+    const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % total);
     }, AUTO_ADVANCE_MS);
 
-    return () => timerRef.current && clearInterval(timerRef.current);
+    return () => clearInterval(id);
   }, [isPaused, total]);
 
   // ---------------- MOBILE CARD COUNT ----------------
@@ -32,7 +33,22 @@ export default function HeroStage() {
     return 4; // desktop → 4 cards
   }
 
-  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+  const [visibleCount, setVisibleCount] = useState(4); // default for SSR
+
+  useEffect(() => {
+    function getVisibleCount() {
+      if (window.innerWidth < 640) return 2;
+      if (window.innerWidth < 1024) return 3;
+      return 4;
+    }
+
+    setVisibleCount(getVisibleCount());
+
+    const handleResize = () => setVisibleCount(getVisibleCount());
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     function handleResize() {
