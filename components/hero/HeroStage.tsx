@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { heroSlides } from "./heroData";
+import useTypingText from "./useTypingText";
 import HeroCard from "./HeroCard";
 
 const AUTO_ADVANCE_MS = 5000; // FASTER SLIDE CHANGES
@@ -52,6 +53,9 @@ export default function HeroStage() {
   const active = heroSlides[index];
   const prevIndex = (index - 1 + total) % total;
   const previous = heroSlides[prevIndex];
+  const typedSubtitle = useTypingText(active.subtitle || "");
+  const typedTitle = useTypingText(active.title || "");
+  const typedDescription = useTypingText(active.description || "");
 
   return (
     <section
@@ -96,17 +100,17 @@ export default function HeroStage() {
             >
               {active.subtitle && (
                 <div className="uppercase tracking-wide text-xs sm:text-sm opacity-80 mb-2">
-                  {active.subtitle}
+                  {typedSubtitle}
                 </div>
               )}
 
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight">
-                {active.title}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                {typedTitle}
               </h1>
 
               {active.description && (
                 <p className="mt-4 text-base sm:text-lg opacity-90 max-w-lg">
-                  {active.description}
+                  {typedDescription}
                 </p>
               )}
 
