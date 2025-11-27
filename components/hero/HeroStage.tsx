@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { heroSlides } from "./heroData";
 import HeroCard from "./HeroCard";
 
-const AUTO_ADVANCE_MS = 3000; // FASTER SLIDE CHANGES
+const AUTO_ADVANCE_MS = 5000; // FASTER SLIDE CHANGES
 
 export default function HeroStage() {
   const total = heroSlides.length;
@@ -50,12 +50,17 @@ export default function HeroStage() {
   }, [index, total, visibleCount]);
 
   const active = heroSlides[index];
+  const prevIndex = (index - 1 + total) % total;
+  const previous = heroSlides[prevIndex];
 
   return (
     <section
       className="relative w-full h-screen overflow-hidden bg-[#0A0F1F]"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        backgroundImage: `url(${previous.image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       {/* ------------------- BACKGROUND ------------------- */}
       <AnimatePresence mode="wait">
@@ -104,6 +109,27 @@ export default function HeroStage() {
                   {active.description}
                 </p>
               )}
+
+              {/* CTA BUTTONS */}
+              <div className="mt-6 flex gap-4">
+                {/* Primary CTA */}
+                <button
+                  className="px-6 py-3 rounded-full font-semibold 
+               bg-[#ff6b2c] text-white shadow-lg 
+               hover:bg-[#fc9062] transition-all"
+                >
+                  {active.cta1}
+                </button>
+
+                {/* Secondary CTA */}
+                <button
+                  className="px-6 py-3 rounded-full font-semibold text-white 
+               border border-white/40 backdrop-blur-md 
+               hover:bg-white/10 transition-all"
+                >
+                  {active.cta2}
+                </button>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -178,6 +204,25 @@ export default function HeroStage() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" />
             </svg>
+          </button>
+          {/* Pause / Play */}
+          <button
+            onClick={() => setIsPaused((p) => !p)}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+             border border-white/30 flex items-center justify-center 
+             backdrop-blur-md text-white"
+          >
+            {isPaused ? (
+              // Play icon
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5l12 7-12 7V5z" fill="currentColor" />
+              </svg>
+            ) : (
+              // Pause icon
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" fill="currentColor" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
