@@ -17,13 +17,14 @@ export default function HeroCard({ slide, indexInRail = 0 }: HeroCardProps) {
   return (
     <motion.div
       className="
-        w-40 h-32              /* mobile size */
-        sm:w-48 sm:h-36        /* small devices */
-        md:w-56 md:h-40        /* tablets */
-        lg:w-64 lg:h-48        /* laptop */
-        xl:w-72 xl:h-56        /* large screens */
+        w-40 h-32            
+        sm:w-48 sm:h-36       
+        md:w-56 md:h-40       
+        lg:w-64 lg:h-48       
+        xl:w-72 xl:h-56        
         rounded-2xl overflow-hidden shadow-xl relative bg-gray-800/30
-      "
+        border border-gray-300
+        "
       initial={{ opacity: 0.0, y: 20, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.97 }}

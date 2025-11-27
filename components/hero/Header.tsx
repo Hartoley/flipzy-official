@@ -71,11 +71,11 @@ export default function FlipzyHeader() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`md:hidden fixed right-0 h-full w-64 bg-black z-30 text-white p-6 flex flex-col gap-6 transform transition-transform duration-300 ${
+        className={`md:hidden fixed top-1 right-0 rounded-bl-2xl h-[70vh] w-64 bg-[#06090f] z-50 text-white p-6 flex flex-col gap-6  transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between bg-black  items-center mb-4">
+        <div className="flex justify-between items-center mb-4">
           <span className="text-lg font-semibold">Menu</span>
           <button onClick={() => setMenuOpen(false)}>
             <svg
