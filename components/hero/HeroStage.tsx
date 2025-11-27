@@ -6,6 +6,7 @@ import { heroSlides } from "./heroData";
 import useTypingText from "./useTypingText";
 
 import HeroCard from "./HeroCard";
+import Headers from "./Header";
 
 const AUTO_ADVANCE_MS = 5000; // FASTER SLIDE CHANGES
 
@@ -59,178 +60,185 @@ export default function HeroStage() {
   const typedDescription = useTypingText(active.description || "");
 
   return (
-    <section
-      className="relative w-full h-screen overflow-hidden bg-[#0A0F1F]"
-      style={{
-        backgroundImage: `url(${previous.image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* ------------------- BACKGROUND ------------------- */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={active.id}
-          className="absolute inset-0 z-0"
-          initial={{ scale: 0.7, filter: "blur(12px)" }}
-          animate={{ scale: 1, filter: "blur(0px)" }}
-          exit={{ scale: 1.05, opacity: 0 }}
-          transition={{
-            duration: 0.45,
-            ease: [0.12, 0.9, 0.33, 1],
-          }}
-        >
-          <img src={active.image} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/25" />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* ------------------- LEFT TEXT ------------------- */}
-      <div
-        className="absolute inset-0 z-10 flex items-center 
-                      px-6 sm:px-10 md:px-16"
+    <>
+      <Headers />
+      <section
+        className="relative w-full h-[90vh] overflow-hidden bg-[#0A0F1F]"
+        style={{
+          backgroundImage: `url(${previous.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        <div className="max-w-xl text-white">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.id + "-text"}
-              initial={{ opacity: 0, x: -60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 60 }}
-              transition={{ duration: 0.6 }}
-            >
-              {active.subtitle && (
-                <div className="uppercase tracking-wide text-xs sm:text-sm opacity-80 mb-2">
-                  {typedSubtitle}
-                </div>
-              )}
+        {/* ------------------- BACKGROUND ------------------- */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active.id}
+            className="absolute inset-0 z-0"
+            initial={{ scale: 0.7, filter: "blur(12px)" }}
+            animate={{ scale: 1, filter: "blur(0px)" }}
+            exit={{ scale: 1.05, opacity: 0 }}
+            transition={{
+              duration: 0.45,
+              ease: [0.12, 0.9, 0.33, 1],
+            }}
+          >
+            <img src={active.image} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/25" />
+          </motion.div>
+        </AnimatePresence>
 
-              <h4 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
-                {typedTitle}
-              </h4>
+        {/* ------------------- LEFT TEXT ------------------- */}
+        <div
+          className="absolute inset-0 z-10 flex items-center 
+                      px-6 sm:px-10 md:px-16"
+        >
+          <div className="max-w-xl text-white">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id + "-text"}
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 60 }}
+                transition={{ duration: 0.6 }}
+              >
+                {active.subtitle && (
+                  <div className="uppercase tracking-wide text-xs sm:text-sm opacity-80 mb-2">
+                    {typedSubtitle}
+                  </div>
+                )}
 
-              {active.description && (
-                <p className="mt-4 text-base sm:text-lg opacity-90 max-w-lg">
-                  {typedDescription}
-                </p>
-              )}
+                <h4 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                  {typedTitle}
+                </h4>
 
-              {/* CTA BUTTONS */}
-              <div className="mt-6 flex gap-4">
-                {/* Primary CTA */}
-                <button
-                  className="px-6 py-3 rounded-full font-semibold 
+                {active.description && (
+                  <p className="mt-4 text-base sm:text-lg opacity-90 max-w-lg">
+                    {typedDescription}
+                  </p>
+                )}
+
+                {/* CTA BUTTONS */}
+                <div className="mt-6 flex gap-4">
+                  {/* Primary CTA */}
+                  <button
+                    className="px-6 py-3 rounded-full font-semibold 
                bg-[#ff6b2c] text-white shadow-lg 
                hover:bg-[#fc9062] transition-all"
-                >
-                  {active.cta1}
-                </button>
+                  >
+                    {active.cta1}
+                  </button>
 
-                {/* Secondary CTA */}
-                <button
-                  className="px-6 py-3 rounded-full font-semibold text-white 
+                  {/* Secondary CTA */}
+                  <button
+                    className="px-6 py-3 rounded-full font-semibold text-white 
                border border-white/40 backdrop-blur-md 
                hover:bg-white/10 transition-all"
-                >
-                  {active.cta2}
-                </button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                  >
+                    {active.cta2}
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
 
-      {/* ------------------- CARD RAIL ------------------- */}
-      <div
-        className="
+        {/* ------------------- CARD RAIL ------------------- */}
+        <div
+          className="
           absolute bottom-8 sm:bottom-10 md:bottom-14 
           right-1/2 translate-x-1/2 md:translate-x-0 md:right-16 
           z-20
         "
-      >
-        <div
-          className="
+        >
+          <div
+            className="
             overflow-hidden mx-auto
             w-[90vw] sm:w-[80vw] md:w-[50vw]
             max-w-[900px]
           "
-        >
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              key={`rail-${index}`}
-              className="flex gap-4 sm:gap-5 md:gap-6"
-              initial={{ opacity: 0, x: 120 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -120 }}
-              transition={{ duration: 0.5 }}
-            >
-              {rail.map((s, i) => (
-                <HeroCard key={s.id} slide={s} indexInRail={i} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* ------------------- CONTROLS ------------------- */}
-        <div className="mt-4 flex items-center gap-3 sm:gap-4 justify-center md:justify-start">
-          {/* Previous */}
-          <button
-            onClick={() => setIndex((i) => (i - 1 + total) % total)}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
-                       border border-white/30 flex items-center justify-center 
-                       backdrop-blur-md text-white"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </button>
-
-          {/* Progress bar */}
-          <div className="h-2 w-40 sm:w-56 bg-white/15 rounded-full overflow-hidden">
-            <motion.div
-              key={`progress-${index}`}
-              className="h-full bg-white/50"
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{
-                duration: AUTO_ADVANCE_MS / 1000,
-                ease: "linear",
-              }}
-            />
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={`rail-${index}`}
+                className="flex gap-4 sm:gap-5 md:gap-6"
+                initial={{ opacity: 0, x: 120 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -120 }}
+                transition={{ duration: 0.5 }}
+              >
+                {rail.map((s, i) => (
+                  <HeroCard key={s.id} slide={s} indexInRail={i} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Next */}
-          <button
-            onClick={() => setIndex((i) => (i + 1) % total)}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+          {/* ------------------- CONTROLS ------------------- */}
+          <div className="mt-4 flex items-center gap-3 sm:gap-4 justify-center md:justify-start">
+            {/* Previous */}
+            <button
+              onClick={() => setIndex((i) => (i - 1 + total) % total)}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
                        border border-white/30 flex items-center justify-center 
                        backdrop-blur-md text-white"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </button>
-          {/* Pause / Play */}
-          <button
-            onClick={() => setIsPaused((p) => !p)}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18l-6-6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </button>
+
+            {/* Progress bar */}
+            <div className="h-2 w-40 sm:w-56 bg-white/15 rounded-full overflow-hidden">
+              <motion.div
+                key={`progress-${index}`}
+                className="h-full bg-white/50"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{
+                  duration: AUTO_ADVANCE_MS / 1000,
+                  ease: "linear",
+                }}
+              />
+            </div>
+
+            {/* Next */}
+            <button
+              onClick={() => setIndex((i) => (i + 1) % total)}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+                       border border-white/30 flex items-center justify-center 
+                       backdrop-blur-md text-white"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </button>
+            {/* Pause / Play */}
+            <button
+              onClick={() => setIsPaused((p) => !p)}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full 
              border border-white/30 flex items-center justify-center 
              backdrop-blur-md text-white"
-          >
-            {isPaused ? (
-              // Play icon
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M8 5l12 7-12 7V5z" fill="currentColor" />
-              </svg>
-            ) : (
-              // Pause icon
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" fill="currentColor" />
-              </svg>
-            )}
-          </button>
+            >
+              {isPaused ? (
+                // Play icon
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5l12 7-12 7V5z" fill="currentColor" />
+                </svg>
+              ) : (
+                // Pause icon
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" fill="currentColor" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
