@@ -1,58 +1,28 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 
-type HeroCardProps = {
-  slide: {
-    id: string | number;
-    image: string;
-    title?: string;
-    subtitle?: string;
-  };
+export default function HeroCard({
+  slide,
+  indexInRail,
+}: {
+  slide: any;
   indexInRail?: number;
-};
-
-export default function HeroCard({ slide, indexInRail = 0 }: HeroCardProps) {
+}) {
   return (
     <motion.div
-      className="
-        w-40 h-32            
-        sm:w-48 sm:h-36       
-        md:w-56 md:h-40       
-        lg:w-64 lg:h-48       
-        xl:w-72 xl:h-56        
-        rounded-2xl overflow-hidden shadow-xl relative bg-gray-800/30
-        border border-gray-300
-        "
-      initial={{ opacity: 0.0, y: 20, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -20, scale: 0.97 }}
-      transition={{ duration: 0.45, delay: indexInRail * 0.05 }}
+      className="w-[220px] sm:w-[260px] md:w-[280px] lg:w-[320px] h-[160px] sm:h-[200px] md:h-[220px] rounded-xl overflow-hidden shadow-lg relative"
+      initial={{ scale: 0.98, opacity: 0.85 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.45, delay: (indexInRail ?? 0) * 0.03 }}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${slide.image})` }}
+      <img
+        src={slide.image}
+        className="w-full h-full object-cover"
+        alt={slide.title || ""}
       />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3 sm:p-4">
-        <div className="text-white">
-          {slide.subtitle && (
-            <div className="text-[3px] sm:text-xs opacity-80 uppercase tracking-wider">
-              {/* {slide.subtitle} */}
-            </div>
-          )}
-
-          {slide.title && (
-            <div
-              className="font-semibold 
-                text-sm sm:text-base md:text-lg 
-                leading-tight"
-            >
-              {slide.title}
-            </div>
-          )}
-        </div>
+      <div className="absolute left-3 bottom-3 text-white drop-shadow">
+        <div className="font-semibold">{slide.title}</div>
       </div>
     </motion.div>
   );
