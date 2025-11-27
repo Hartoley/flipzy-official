@@ -107,7 +107,7 @@ export default function HeroStage() {
         {/* ------------------- LEFT TEXT ------------------- */}
         <div
           className="absolute inset-0 z-10 flex items-center 
-                      px-6 sm:px-10 md:px-16 bottom-20"
+                      px-6 sm:px-10 md:px-16 bottom-10 md:bottom-0"
         >
           <div className="max-w-xl text-white">
             <AnimatePresence mode="wait">
