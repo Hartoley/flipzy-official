@@ -8,7 +8,7 @@ export default function FlipzyHeader() {
       {/* Logo */}
       <div className="flex items-center gap-2">
         {/* Replace with your logo */}
-        <img src="/images/logo.jpg" alt="Flipzy Logo" className="h-8 w-auto" />
+        <img src="/logo.png" alt="Flipzy Logo" className="h-8 w-auto" />
         <span className="text-white text-xl font-semibold">Flipzy</span>
       </div>
 

@@ -37,7 +37,7 @@ export default function HeroCard({ slide, indexInRail = 0 }: HeroCardProps) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3 sm:p-4">
         <div className="text-white">
           {slide.subtitle && (
-            <div className="text-[9px] sm:text-xs opacity-80 uppercase tracking-wider">
+            <div className="text-[3px] sm:text-xs opacity-80 uppercase tracking-wider">
               {slide.subtitle}
             </div>
           )}
