@@ -52,7 +52,10 @@ export default function FlipzySection() {
             <p className="text-sm text-gray-700 mb-4">
               Banking made simple: open your account in 10 minutes.
             </p>
-            <div className="w-full h-52 bg-gray-200 rounded-xl"></div>
+            <div className="w-full h-52  rounded-xl flex items-center justify-center">
+              {/* <img src="/images/mobile2.jpg" className="w-full rounded-2xl" /> */}
+              <img src="/images/mobile.png" className="w-full rounded-2xl" />
+            </div>
           </motion.div>
 
           {/* Card 2 */}
