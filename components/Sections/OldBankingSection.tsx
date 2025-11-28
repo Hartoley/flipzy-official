@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import PhoneStack from "./PhoneStack";
 
 export default function FlipzySection() {
   return (
@@ -41,6 +42,9 @@ export default function FlipzySection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="rounded-2xl bg-white text-black p-6 shadow-xl text-center "
           >
+            <div className="flex justify-center mb-4">
+              <img src="/logo.png" className="w-16" />
+            </div>
             <h3 className="text-xl font-bold mb-2">
               Open an account online in{" "}
               <span className="text-[#ff6a00]">10 minutes</span>
@@ -66,7 +70,7 @@ export default function FlipzySection() {
                 bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
                 border border-orange-300 rotate-[-2deg]"
               >
-                <img src="/avatar1.png" className="w-8 h-8 rounded-lg" />
+                <img src="/avatar1.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
                   <p className="text-xs font-semibold">Emily Carter</p>
                   <p className="text-[10px] text-gray-500">Personal account</p>
@@ -82,7 +86,7 @@ export default function FlipzySection() {
                 bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
                 border border-orange-300 rotate-[2deg]"
               >
-                <img src="/avatar2.png" className="w-8 h-8 rounded-lg" />
+                <img src="/avatar2.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
                   <p className="text-xs font-semibold">Daniel Smith</p>
                   <p className="text-[10px] text-gray-500">Business account</p>
@@ -96,7 +100,7 @@ export default function FlipzySection() {
                 bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
                 border rotate-[-1deg]"
               >
-                <img src="/avatar3.png" className="w-8 h-8 rounded-lg" />
+                <img src="/avatar3.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
                   <p className="text-xs font-semibold">Olivia Brown</p>
                   <p className="text-[10px] text-gray-500">Personal account</p>
@@ -130,11 +134,32 @@ export default function FlipzySection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="rounded-2xl bg-white text-black p-6 shadow-xl"
           >
-            <h3 className="text-xl font-bold mb-2">Transparent pricing</h3>
-            <p className="text-sm text-gray-700 mb-4">
+            <div className="flex justify-center mb-4">
+              <img src="/logo.png" className="w-16" />
+            </div>
+
+            {/* TITLE */}
+            <h1 className="text-1xl font-bold text-black">
+              Transparent
+              <br />
+              pricing
+            </h1>
+
+            {/* SUBTITLE */}
+            <p className="text-gray-700 mt-2">
               Banking made simple: open your account in 10 minutes.
             </p>
-            <div className="w-full h-52 bg-gray-200 rounded-xl"></div>
+
+            {/* BUTTON */}
+            <button className="mt-4 px-6 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold">
+              Open an Account
+            </button>
+
+            {/* PHONE STACK */}
+
+            <div className="w-full h-40 flex flex-col items-center justify-center rounded-xl">
+              <PhoneStack />
+            </div>
           </motion.div>
         </div>
 
