@@ -7,7 +7,6 @@ export default function FlipzyHeader() {
     <header className="fixed bg-[#06090fa9] top-0 left-0 w-full z-50 backdrop-blur-md px-4 sm:px-8 py-4 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
-        {/* Replace with your logo */}
         <img src="/images/logo.png" alt="Flipzy Logo" className="h-10 w-auto" />
         <span className="text-white text-xl font-semibold">Flipzy</span>
       </div>
@@ -34,11 +33,14 @@ export default function FlipzyHeader() {
         </a>
       </nav>
 
-      {/* CTA */}
+      {/* Desktop CTA */}
       <div className="hidden md:block">
-        <button className="px-5 py-2 rounded-full border border-white/30 text-white text-sm backdrop-blur-md hover:bg-white/10 transition">
+        <a
+          href="/auth/getstarted"
+          className="px-5 py-2 rounded-full border border-white/30 text-white text-sm backdrop-blur-md hover:bg-white/10 transition"
+        >
           Open an Account
-        </button>
+        </a>
       </div>
 
       {/* Mobile Hamburger */}
@@ -71,7 +73,7 @@ export default function FlipzyHeader() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`md:hidden fixed top-1 right-0 rounded-bl-2xl h-[70vh] w-64 bg-[#06090f] z-50 text-white p-6 flex flex-col gap-6  transform transition-transform duration-300 ${
+        className={`md:hidden fixed top-1 right-0 rounded-bl-2xl h-[70vh] w-64 bg-[#06090f] z-50 text-white p-6 flex flex-col gap-6 transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -109,9 +111,13 @@ export default function FlipzyHeader() {
           Contacts
         </a>
 
-        <button className="mt-4 px-5 py-2 rounded-full border border-white/30 text-white backdrop-blur-md hover:bg-white/10 transition">
+        {/* Mobile CTA */}
+        <a
+          href="/auth/getstarted"
+          className="mt-4 px-5 py-2 rounded-full border border-white/30 text-white backdrop-blur-md hover:bg-white/10 transition"
+        >
           Open an Account
-        </button>
+        </a>
       </div>
     </header>
   );

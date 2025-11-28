@@ -8,7 +8,7 @@ import security from "../../../public/images/secutity1.jpg";
 import logo from "../../../public/images/logo.jpg";
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
     email: "",
