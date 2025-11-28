@@ -148,33 +148,25 @@ const features = [
   },
 ];
 
-const cards = [
-  {
-    title: "Types Of Business And Personal Accounts",
-    desc: "Easily open any type of account — personal or business — with global services and automatic updates.",
-    imgAlt: "account-types-illustration",
-  },
-  {
-    title: "Opening Of Essential Bank Account",
-    desc: "Open an account online in a secure, fast, and simple way with two clicks.",
-    imgAlt: "open-account-illustration",
-  },
-  {
-    title: "Information And Data Access",
-    desc: "See and manage detailed account information quickly and without friction.",
-    imgAlt: "data-access-illustration",
-  },
-];
-
 export default function ToDareSection() {
   return (
     <section className="w-full bg-flipzy-dark text-white py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* TOP CARD */}
-        <div className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-10 mb-20 shadow-xl">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-10 mb-20 shadow-xl"
+        >
           <div className="flex flex-col lg:flex-row justify-between gap-10">
             {/* LEFT TEXT */}
-            <div className="lg:w-1/2 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="lg:w-1/2 space-y-6"
+            >
               <h2 className="text-4xl font-semibold leading-tight">
                 We Tried To Provide You <br /> With All Global Banking Services
               </h2>
@@ -186,59 +178,64 @@ export default function ToDareSection() {
               <button className="px-6 py-3 rounded-full bg-flipzy-orange text-black font-semibold hover:bg-white transition">
                 Explore More →
               </button>
-            </div>
+            </motion.div>
 
             {/* RIGHT FEATURES */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-6 lg:w-1/2">
-              {[
-                "Simultaneous and Fast Operation",
-                "Can Be Connected to All Accounts",
-                "Strong and Advanced Encryption",
-                "Comprehensive Electronic Banking Services",
-              ].map((label, i) => (
-                <div
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-6 lg:w-1/2"
+            >
+              {features.map((feature, i) => (
+                <motion.div
                   key={i}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                   className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 text-center hover:bg-[#222] transition shadow-lg"
                 >
                   <div className="h-20 w-full flex items-center justify-center opacity-60">
-                    [ICON]
+                    <feature.illustration />
                   </div>
-                  <p className="text-sm text-white/70 mt-4">{label}</p>
-                </div>
+                  <p className="text-sm text-white/70 mt-4">{feature.title}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* TITLE */}
-        <h3 className="text-3xl font-semibold mb-10">
+        <motion.h3
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl font-semibold mb-10"
+        >
           Up-To-Date and Fast Banking <br /> Services in One Place
-        </h3>
+        </motion.h3>
 
         {/* CAROUSEL */}
-        <div className="relative overflow-hidden">
-          <div
-            className="flex animate-slide gap-6"
-            style={{ width: "calc(350px * 6)" }}
+        <div className="overflow-hidden relative">
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
           >
-            {Array.from({ length: 6 }).map((_, i) => (
+            {[...features, ...features].map((feature, i) => (
               <div
                 key={i}
-                className="min-w-[350px] bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl hover:scale-[1.02] transition duration-300"
+                className="max-w-[25vw] bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl flex-shrink-0"
               >
-                <div className="h-32 w-full bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
-                  [IMAGE]
+                <div className="h-32 w-full flex items-center justify-center bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
+                  <feature.illustration />
                 </div>
-                <h4 className="text-xl font-semibold mb-3">
-                  Flipzy Feature {i + 1}
-                </h4>
+                <h4 className="text-xl font-semibold mb-3">{feature.title}</h4>
                 <p className="text-white/60 text-sm leading-relaxed">
-                  Description for this Flipzy feature. Replace with real copy
-                  later.
+                  {feature.desc}
                 </p>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

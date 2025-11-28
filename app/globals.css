@@ -6,10 +6,16 @@
 }
 
 @theme inline {
+  /* existing */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* ADD YOUR CUSTOM COLORS HERE */
+  --color-flipzy-orange: #ff6b2c;
+  --color-flipzy-blue: #0a0f1f;
+  --color-flipzy-dark: #06090f;
 }
 
 @media (prefers-color-scheme: dark) {
