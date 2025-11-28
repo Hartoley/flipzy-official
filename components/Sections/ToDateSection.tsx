@@ -193,7 +193,7 @@ export default function ToDareSection() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-6 lg:w-1/2"
+              className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 lg:w-1/2"
             >
               {features.map((feature, i) => (
                 <motion.div
@@ -222,22 +222,22 @@ export default function ToDareSection() {
           Up-To-Date and Fast Banking <br /> Services in One Place
         </motion.h3>
 
-        {/* CAROUSEL */}
+        {/* RESPONSIVE CAROUSEL */}
         <div className="overflow-hidden relative">
           <motion.div
-            className="flex gap-6"
+            className="flex gap-4 sm:gap-6"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
           >
             {[...features, ...features].map((feature, i) => (
               <div
                 key={i}
-                className="max-w-[25vw] bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl flex-shrink-0"
+                className="flex-shrink-0 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[25%] bg-[#0f0f0f] border border-white/10 rounded-3xl p-6 shadow-xl"
               >
-                <div className="h-32 w-full flex items-center justify-center bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
+                <div className="h-32 w-full flex items-center justify-center bg-[#1a1a1a] rounded-xl mb-4 opacity-60">
                   <feature.illustration color={feature.color} />
                 </div>
-                <h4 className="text-xl font-semibold mb-3">{feature.title}</h4>
+                <h4 className="text-xl font-semibold mb-2">{feature.title}</h4>
                 <p className="text-white/60 text-sm leading-relaxed">
                   {feature.desc}
                 </p>
