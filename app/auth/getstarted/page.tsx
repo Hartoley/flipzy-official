@@ -29,10 +29,13 @@ export default function AuthPage() {
 
     try {
       if (isLogin) {
-        const res = await axios.post("/api/login", {
-          email: form.email,
-          password: form.password,
-        });
+        const res = await axios.post(
+          "https://chef-chiller-node.onrender.com/user/login",
+          {
+            email: form.email,
+            password: form.password,
+          }
+        );
         console.log("Login success:", res.data);
       } else {
         if (form.password !== form.confirmPassword) {
@@ -41,11 +44,14 @@ export default function AuthPage() {
           return;
         }
 
-        const res = await axios.post("/api/signup", {
-          fullName: form.fullName,
-          email: form.email,
-          password: form.password,
-        });
+        const res = await axios.post(
+          "https://chef-chiller-node.onrender.com/user/register",
+          {
+            fullName: form.fullName,
+            email: form.email,
+            password: form.password,
+          }
+        );
         console.log("Signup success:", res.data);
       }
     } catch (err: any) {
