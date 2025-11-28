@@ -11,6 +11,7 @@ export default function FlipzySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           className="mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
         >
           {/* LEFT SIDE — Heading */}
@@ -27,7 +28,7 @@ export default function FlipzySection() {
               transparent, and instant just the way it should be.
             </p>
 
-            <button className="bg-gradient-to-r from-[#ff6a00] to-[#ff8800] text-white px-4 py-1 rounded-full font-normal shadow-md hover:opacity-90 transition-all">
+            <button className="bg-gradient-to-r from-[#ff6a00] to-[#ff8800] text-white px-4 py-1 rounded-full font-normal shadow-md hover:opacity-90 hover:shadow-[0_0_20px_rgba(255,106,0,0.5)] transition-all">
               Open an Account
             </button>
           </div>
@@ -40,20 +41,23 @@ export default function FlipzySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl bg-white text-black p-6 shadow-xl text-center "
+            viewport={{ once: true }}
+            className="rounded-2xl bg-white text-black p-6 shadow-xl text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           >
             <div className="flex justify-center mb-4">
               <img src="/logo.png" className="w-16" />
             </div>
+
             <h3 className="text-xl font-bold mb-2">
               Open an account online in{" "}
               <span className="text-[#ff6a00]">10 minutes</span>
             </h3>
+
             <p className="text-sm text-gray-700 mb-4">
               Banking made simple: open your account in 10 minutes.
             </p>
-            <div className="w-full h-52  rounded-xl flex items-center justify-center">
-              {/* <img src="/images/mobile2.jpg" className="w-full rounded-2xl" /> */}
+
+            <div className="w-full h-52 rounded-xl flex items-center justify-center">
               <img src="/images/mobile.png" className="w-full rounded-2xl" />
             </div>
           </motion.div>
@@ -63,15 +67,15 @@ export default function FlipzySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-3xl bg-white text-black p-8 shadow-xl flex flex-col items-center"
+            viewport={{ once: true }}
+            className="rounded-3xl bg-white text-black p-8 shadow-xl flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           >
-            {/* SMALLER STACK AREA */}
-            <div className="relative w-full h-40 flex items-center  justify-center">
-              {/* TOP CARD — SMALL SLANT */}
+            {/* STACKED CARDS */}
+            <div className="relative w-full h-40 flex items-center justify-center">
+              {/* TOP CARD */}
               <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 
-                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
-                border border-orange-300 rotate-[-2deg]"
+                className="absolute top-0 left-1/2 -translate-x-1/2 bg-white shadow-md rounded-xl 
+                px-4 py-2.5 w-60 flex items-center gap-3 border border-orange-300 rotate-[-2deg]"
               >
                 <img src="/avatar1.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
@@ -83,11 +87,10 @@ export default function FlipzySection() {
                 </p>
               </div>
 
-              {/* MID CARD — SMALL SLANT */}
+              {/* MIDDLE CARD */}
               <div
-                className="absolute top-12 left-1/2 -translate-x-1/2 
-                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
-                border border-orange-300 rotate-[2deg]"
+                className="absolute top-12 left-1/2 -translate-x-1/2 bg-white shadow-md rounded-xl 
+                px-4 py-2.5 w-60 flex items-center gap-3 border border-orange-300 rotate-[2deg]"
               >
                 <img src="/avatar2.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
@@ -97,11 +100,10 @@ export default function FlipzySection() {
                 <p className="text-xs font-semibold text-gray-700">8,200 UAH</p>
               </div>
 
-              {/* BOTTOM CARD — VERY SMALL SLANT */}
+              {/* BOTTOM CARD */}
               <div
-                className="absolute top-24 left-1/2 -translate-x-1/2 
-                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
-                border rotate-[-1deg]"
+                className="absolute top-24 left-1/2 -translate-x-1/2 bg-white shadow-md rounded-xl 
+                px-4 py-2.5 w-60 flex items-center gap-3 border rotate-[-1deg]"
               >
                 <img src="/avatar3.jpg" className="w-8 h-8 rounded-lg" />
                 <div className="flex-1">
@@ -114,17 +116,14 @@ export default function FlipzySection() {
               </div>
             </div>
 
-            {/* ICON */}
             <div className="w-16 h-auto flex items-center justify-center mb-4">
               <img src="/logo.png" className="w-full" />
             </div>
 
-            {/* TITLE */}
             <h3 className="text-xl font-bold text-center">
               Instant transactions
             </h3>
 
-            {/* SUBTEXT */}
             <p className="text-sm text-gray-600 text-center mt-1 mb-4">
               Banking made simple: open your account in 10 minutes.
             </p>
@@ -135,34 +134,37 @@ export default function FlipzySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl bg-white text-black p-6 shadow-xl"
+            viewport={{ once: true }}
+            className="rounded-2xl bg-white text-black p-6 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           >
             <div className="flex justify-center mb-4">
               <img src="/logo.png" className="w-16" />
             </div>
 
-            {/* TITLE */}
             <h1 className="text-1xl font-bold text-black">
               Transparent
               <br />
               pricing
             </h1>
 
-            {/* SUBTITLE */}
             <p className="text-gray-700 mt-2">
               Banking made simple: open your account in 10 minutes.
             </p>
 
-            {/* BUTTON */}
-            <button className="mt-4 px-6 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold">
+            <button className="mt-4 px-6 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold hover:shadow-[0_0_20px_rgba(255,106,0,0.5)] transition-all">
               Open an Account
             </button>
 
-            {/* PHONE STACK */}
-
-            <div className="w-full h-40 flex flex-col items-center justify-center rounded-xl">
+            {/* PHONESTACK with reveal animation */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="w-full h-40 flex flex-col items-center justify-center rounded-xl"
+            >
               <PhoneStack />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -171,9 +173,9 @@ export default function FlipzySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
           className="mt-20 rounded-3xl bg-white text-black p-8 shadow-xl"
         >
-          {/* TOP SECTION */}
           <div className="flex flex-col md:flex-row justify-between md:items-start gap-4">
             <h3 className="text-xl font-semibold leading-snug">
               Why thousands <br /> of clients trust us
@@ -185,26 +187,22 @@ export default function FlipzySection() {
             </p>
           </div>
 
-          {/* BOTTOM CARDS */}
           <div className="grid md:grid-cols-3 gap-5 mt-8">
-            {/* LEFT ORANGE CARD */}
-            <div className="rounded-xl p-6 bg-[#ff6a00] text-white font-semibold text-base leading-snug flex flex-col justify-center">
+            <div className="rounded-xl p-6 bg-[#ff6a00] text-white font-semibold text-base leading-snug flex flex-col justify-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
               Transfers in Nigeria <br /> and worldwide
               <p className="text-xs font-normal mt-2 opacity-80">
                 Send money to loved ones or partners anywhere, hassle-free
               </p>
             </div>
 
-            {/* MIDDLE BLACK CARD */}
-            <div className="rounded-xl p-6 bg-black text-white flex flex-col justify-center items-center">
+            <div className="rounded-xl p-6 bg-black text-white flex flex-col justify-center items-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
               <span className="text-2xl font-bold">+1M</span>
               <p className="text-gray-400 text-xs mt-1">
                 Successful transactions daily
               </p>
             </div>
 
-            {/* RIGHT LIGHT CARD */}
-            <div className="rounded-xl p-6 bg-gradient-to-b from-gray-100 to-white flex flex-col justify-center text-center">
+            <div className="rounded-xl p-6 bg-gradient-to-b from-gray-100 to-white flex flex-col justify-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
               <span className="text-2xl font-bold text-black">95%</span>
               <p className="text-gray-600 text-xs mt-1">Clients recommend us</p>
             </div>
