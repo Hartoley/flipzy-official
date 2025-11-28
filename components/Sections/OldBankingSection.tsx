@@ -39,7 +39,7 @@ export default function FlipzySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl bg-white text-black p-6 shadow-xl"
+            className="rounded-2xl bg-white text-black p-6 shadow-xl text-center "
           >
             <h3 className="text-xl font-bold mb-2">
               Open an account online in{" "}
@@ -59,7 +59,7 @@ export default function FlipzySection() {
             className="rounded-3xl bg-white text-black p-8 shadow-xl flex flex-col items-center"
           >
             {/* SMALLER STACK AREA */}
-            <div className="relative w-full h-40 flex items-center justify-center">
+            <div className="relative w-full h-40 flex items-center  justify-center">
               {/* TOP CARD — SMALL SLANT */}
               <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 
