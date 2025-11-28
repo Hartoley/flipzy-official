@@ -56,13 +56,71 @@ export default function FlipzySection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-2xl bg-white text-black p-6 shadow-xl"
+            className="rounded-3xl bg-white text-black p-8 shadow-xl flex flex-col items-center"
           >
-            <h3 className="text-xl font-bold mb-2">Instant transactions</h3>
-            <p className="text-sm text-gray-700 mb-4">
+            {/* SMALLER STACK AREA */}
+            <div className="relative w-full h-40 flex items-center justify-center">
+              {/* TOP CARD — SMALL SLANT */}
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 
+                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
+                border border-orange-300 rotate-[-2deg]"
+              >
+                <img src="/avatar1.png" className="w-8 h-8 rounded-lg" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold">Emily Carter</p>
+                  <p className="text-[10px] text-gray-500">Personal account</p>
+                </div>
+                <p className="text-xs font-semibold text-gray-700">
+                  -1,250 UAH
+                </p>
+              </div>
+
+              {/* MID CARD — SMALL SLANT */}
+              <div
+                className="absolute top-12 left-1/2 -translate-x-1/2 
+                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
+                border border-orange-300 rotate-[2deg]"
+              >
+                <img src="/avatar2.png" className="w-8 h-8 rounded-lg" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold">Daniel Smith</p>
+                  <p className="text-[10px] text-gray-500">Business account</p>
+                </div>
+                <p className="text-xs font-semibold text-gray-700">8,200 UAH</p>
+              </div>
+
+              {/* BOTTOM CARD — VERY SMALL SLANT */}
+              <div
+                className="absolute top-24 left-1/2 -translate-x-1/2 
+                bg-white shadow-md rounded-xl px-4 py-2.5 w-60 flex items-center gap-3 
+                border rotate-[-1deg]"
+              >
+                <img src="/avatar3.png" className="w-8 h-8 rounded-lg" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold">Olivia Brown</p>
+                  <p className="text-[10px] text-gray-500">Personal account</p>
+                </div>
+                <p className="text-xs font-semibold text-gray-700">
+                  -2,600 UAH
+                </p>
+              </div>
+            </div>
+
+            {/* ICON */}
+            <div className="w-16 h-auto flex items-center justify-center mb-4">
+              <img src="/logo.png" className="w-full" />
+            </div>
+
+            {/* TITLE */}
+            <h3 className="text-xl font-bold text-center">
+              Instant transactions
+            </h3>
+
+            {/* SUBTEXT */}
+            <p className="text-sm text-gray-600 text-center mt-1 mb-4">
               Banking made simple: open your account in 10 minutes.
             </p>
-            <div className="w-full h-52 bg-gray-200 rounded-xl"></div>
           </motion.div>
 
           {/* Card 3 */}
