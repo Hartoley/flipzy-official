@@ -225,7 +225,7 @@ export default function ToDareSection() {
         {/* RESPONSIVE CAROUSEL */}
         <div className="overflow-hidden relative">
           <motion.div
-            className="flex gap-4 sm:gap-6"
+            className="flex gap-4 sm:gap-6 px-6"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
           >
