@@ -3,11 +3,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+interface SvgProps {
+  color?: string;
+}
+
 const features = [
   {
     title: "Simultaneous And Fast Operation",
+    color: "#F97316",
     desc: "Execute multiple banking operations simultaneously with low latency and high reliability.",
-    illustration: function Svg1() {
+    illustration: function Svg1({ color }: SvgProps) {
       return (
         <svg
           width="80"
@@ -22,7 +27,7 @@ const features = [
               cx="20"
               cy="20"
               r="10"
-              stroke="#8B5CF6"
+              stroke={color}
               strokeWidth="2"
               fill="none"
               opacity="0.9"
@@ -31,7 +36,7 @@ const features = [
               cx="28"
               cy="20"
               r="6"
-              stroke="#C084FC"
+              stroke={color}
               strokeWidth="2"
               fill="none"
             />
@@ -39,7 +44,7 @@ const features = [
               cx="36"
               cy="20"
               r="4"
-              stroke="#E9D5FF"
+              stroke={color}
               strokeWidth="2"
               fill="none"
             />
@@ -50,8 +55,9 @@ const features = [
   },
   {
     title: "Can Be Connected To All Accounts",
+    color: "#F97316",
     desc: "Link multiple bank accounts, cards and external services into a single dashboard.",
-    illustration: function Svg2() {
+    illustration: function Svg2({ color }: SvgProps) {
       return (
         <svg
           width="80"
@@ -63,7 +69,7 @@ const features = [
           <rect x="0" y="0" width="80" height="80" rx="14" fill="#F3F3F6" />
           <g
             transform="translate(12,18)"
-            stroke="#7C3AED"
+            stroke={color}
             strokeWidth="2"
             fill="none"
           >
@@ -84,8 +90,9 @@ const features = [
   },
   {
     title: "Strong And Advanced Encryption",
+    color: "#F97316",
     desc: "Your data is protected with advanced encryption layers and secure key management.",
-    illustration: function Svg3() {
+    illustration: function Svg3({ color }: SvgProps) {
       return (
         <svg
           width="80"
@@ -98,7 +105,7 @@ const features = [
           <g transform="translate(8,12)">
             <path
               d="M24 6C17 6 11 12 11 19V26"
-              stroke="#8B5CF6"
+              stroke={color}
               strokeWidth="2"
               fill="none"
             />
@@ -108,11 +115,11 @@ const features = [
               width="24"
               height="18"
               rx="3"
-              stroke="#7C3AED"
+              stroke={color}
               strokeWidth="2"
               fill="none"
             />
-            <circle cx="24" cy="37" r="3" fill="#7C3AED" />
+            <circle cx="24" cy="37" r="3" fill={color} />
           </g>
         </svg>
       );
@@ -120,8 +127,9 @@ const features = [
   },
   {
     title: "Comprehensive Electronic Banking Services",
+    color: "#F97316",
     desc: "A full set of electronic services from payments to lending and analytics.",
-    illustration: function Svg4() {
+    illustration: function Svg4({ color }: SvgProps) {
       return (
         <svg
           width="80"
@@ -133,14 +141,14 @@ const features = [
           <rect x="0" y="0" width="80" height="80" rx="14" fill="#F3F3F6" />
           <g
             transform="translate(12,16)"
-            stroke="#8B5CF6"
+            stroke={color}
             strokeWidth="2"
             fill="none"
           >
-            <path d="M0 0H32" stroke="#7C3AED" />
-            <path d="M0 10H24" stroke="#C084FC" />
-            <path d="M0 20H16" stroke="#E9D5FF" />
-            <circle cx="40" cy="8" r="6" fill="#E9D5FF" />
+            <path d="M0 0H32" />
+            <path d="M0 10H24" />
+            <path d="M0 20H16" />
+            <circle cx="40" cy="8" r="6" fill={color} />
           </g>
         </svg>
       );
@@ -195,7 +203,7 @@ export default function ToDareSection() {
                   className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 text-center hover:bg-[#222] transition shadow-lg"
                 >
                   <div className="h-20 w-full flex items-center justify-center opacity-60">
-                    <feature.illustration />
+                    <feature.illustration color={feature.color} />
                   </div>
                   <p className="text-sm text-white/70 mt-4">{feature.title}</p>
                 </motion.div>
@@ -227,7 +235,7 @@ export default function ToDareSection() {
                 className="max-w-[25vw] bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl flex-shrink-0"
               >
                 <div className="h-32 w-full flex items-center justify-center bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
-                  <feature.illustration />
+                  <feature.illustration color={feature.color} />
                 </div>
                 <h4 className="text-xl font-semibold mb-3">{feature.title}</h4>
                 <p className="text-white/60 text-sm leading-relaxed">
