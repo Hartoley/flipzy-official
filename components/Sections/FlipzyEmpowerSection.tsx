@@ -5,23 +5,27 @@ import { motion } from "framer-motion";
 
 export default function FlipzyEmpowerSection() {
   return (
-    <section className="w-full bg-flipzy-dark text-white py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative w-full py-16 px-6">
+      {/* WHITE OVERLAY (40% opacity) */}
+      <div className="absolute inset-0 bg-white/40 pointer-events-none"></div>
+
+      {/* CONTENT WRAPPER */}
+      <div className="relative max-w-7xl mx-auto text-white">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10"
         >
-          <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-1">
             Empower Your Daily
             <span className="text-flipzy-orange"> Banking Experience</span>
           </h2>
-          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto">
-            Every tool you need to manage your money effortlessly — fast,
-            secure, and beautifully simple.
+          <p className="text-[#1a1a1a] text-base md:text-lg max-w-2xl mx-auto">
+            Every tool you need to manage your money effortlessly fast, secure,
+            and beautifully simple.
           </p>
         </motion.div>
 
@@ -35,7 +39,13 @@ export default function FlipzyEmpowerSection() {
             viewport={{ once: true }}
             className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
           >
-            <div className="h-24 w-full bg-[#1a1a1a] rounded-xl mb-6 opacity-60"></div>
+            <div className="h-36 w-full bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
+              <img
+                src="../images/all-accounts.jpg"
+                className="w-full h-full rounded-2xl"
+                alt=""
+              />
+            </div>
 
             <h3 className="text-xl font-semibold mb-3">
               Manage All Accounts in One Place
@@ -54,14 +64,20 @@ export default function FlipzyEmpowerSection() {
             viewport={{ once: true }}
             className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
           >
-            <div className="h-24 w-full bg-gradient-to-br from-flipzy-orange to-orange-700 rounded-xl mb-6 opacity-80"></div>
+            <div className="h-36 w-full bg-gradient-to-br from-flipzy-orange to-orange-700 rounded-xl mb-6 opacity-80">
+              <img
+                src="../images/Global.jpg"
+                className="w-full h-full rounded-2xl"
+                alt=""
+              />
+            </div>
 
             <h3 className="text-xl font-semibold mb-3">
               Instant Transfers Worldwide
             </h3>
             <p className="text-white/60 text-sm leading-relaxed">
-              Send and receive money instantly — locally or international —
-              backed by global-grade security.
+              Send and receive money instantly locally or international backed
+              by global-grade security.
             </p>
           </motion.div>
 
@@ -73,14 +89,21 @@ export default function FlipzyEmpowerSection() {
             viewport={{ once: true }}
             className="bg-[#0f0f0f] border border-white/10 rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
           >
-            <div className="h-24 w-full bg-[#1a1a1a] rounded-xl mb-6 opacity-60"></div>
+            <div className="h-36 w-full bg-[#1a1a1a] rounded-xl mb-6 opacity-60">
+              {" "}
+              <img
+                src="../images/All-in-one.jpg"
+                className="w-full h-full rounded-2xl"
+                alt=""
+              />
+            </div>
 
             <h3 className="text-xl font-semibold mb-3">
               Built-In Smart Insights
             </h3>
             <p className="text-white/60 text-sm leading-relaxed">
               Track spending, automate budgets, and get intelligent suggestions
-              — Flipzy helps you stay in control.
+              Flipzy helps you stay in control.
             </p>
           </motion.div>
         </div>
@@ -96,7 +119,7 @@ export default function FlipzyEmpowerSection() {
           <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
             <div className="lg:w-2/3">
               <h3 className="text-3xl font-semibold mb-4">
-                Flipzy gives you everything you need — without complexity.
+                Flipzy gives you everything you need without complexity.
               </h3>
               <p className="text-white/60 max-w-xl">
                 Fast onboarding, unified accounts, high-level security, and
