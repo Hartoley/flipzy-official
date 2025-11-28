@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -8,7 +9,9 @@ import security from "../../../public/images/secutity1.jpg";
 import logo from "../../../public/images/logo.jpg";
 
 export default function AuthPage() {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
+
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -36,7 +39,11 @@ export default function AuthPage() {
             password: form.password,
           }
         );
+
         console.log("Login success:", res.data);
+
+        // Redirect to dashboard
+        router.push("/user/dashboard");
       } else {
         if (form.password !== form.confirmPassword) {
           setError("Passwords do not match!");
@@ -52,7 +59,11 @@ export default function AuthPage() {
             password: form.password,
           }
         );
+
         console.log("Signup success:", res.data);
+
+        // Redirect to dashboard
+        router.push("/user/dashboard");
       }
     } catch (err: any) {
       setError(err.response?.data?.message || "Something went wrong!");
