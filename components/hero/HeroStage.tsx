@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import HeroStageContent from "./HeroStageContent";
+import OldBankingSection from "../Sections/OldBankingSection";
 
 export default function HeroStage() {
   const [mounted, setMounted] = useState(false);
@@ -12,5 +13,10 @@ export default function HeroStage() {
 
   if (!mounted) return null;
 
-  return <HeroStageContent />;
+  return (
+    <>
+      <HeroStageContent />
+      <OldBankingSection />
+    </>
+  );
 }
