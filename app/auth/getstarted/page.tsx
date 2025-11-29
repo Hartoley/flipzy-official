@@ -7,21 +7,21 @@ const testimonials = [
   {
     id: 1,
     title: "I barely had to do anything",
-    text: "The experience was smooth. Everything was handled perfectly, and I barely had to lift a finger. Highly recommended!",
+    text: "The experience was smooth. Everything was handled perfectly and I barely had to lift a finger. Highly recommended!",
     author: "Catherine Johns",
     stars: 5,
   },
   {
     id: 2,
     title: "Super easy and fast",
-    text: "My setup was done in no time. Flipzy made the whole process effortless.",
+    text: "My onboarding was quick and stress-free. Flipzy made everything effortless.",
     author: "Daniel Okoro",
     stars: 5,
   },
   {
     id: 3,
     title: "Reliable every step",
-    text: "Clear instructions and quick support. I loved how seamless it all felt.",
+    text: "Clear instructions, Nigerian support, and a smooth process from start to finish.",
     author: "Fatima Bello",
     stars: 5,
   },
@@ -79,49 +79,51 @@ export default function FlipzyOnboardingPage() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex flex-col md:flex-row">
+    <div className="w-full min-h-screen flex flex-col md:flex-row bg-[#E8ECF3]">
       {/* LEFT DARK PANEL */}
-      <div className="w-full md:w-2/5 bg-[#0F1115] text-white flex flex-col justify-between px-6 py-4 md:py-6 h-auto md:h-screen">
+      <div className="w-full md:w-2/5 bg-[#0F1115] text-white flex flex-col justify-between px-8 py-3 md:py-14 rounded-r-3xl shadow-xl">
         {/* Logo */}
-        <div className="text-2xl font-bold mb-2 md:mb-4">FLIPZY</div>
+        <div className="text-xl font-bold text-[#cc5400] tracking-wide">
+          FLIPZY
+        </div>
 
-        {/* Heading */}
-        <div className="flex-1 md:flex-shrink md:flex md:flex-col md:justify-center">
-          <h1 className="text-2xl md:text-3xl font-bold leading-snug md:leading-tight">
-            Let’s setup
+        {/* Heading + Text */}
+        <div className="flex-1 flex flex-col justify-center max-w-xs mt-2 md:mt-0">
+          <h1 className="text-3xl md:text-4xl font-bold leading-tight">
+            Let’s set up
             <br />
-            your Operating
+            your Flipzy
             <br />
-            Agreement
+            Account
           </h1>
-          <p className="mt-2 text-gray-300 text-xs md:text-sm max-w-xs">
-            All-in-one solution for your business formation. Start from scratch
-            or onboard your existing company with ease.
+          <p className="mt-3 text-gray-300 text-sm leading-relaxed">
+            Open your Flipzy digital bank account in minutes. 100% Nigerian,
+            secure, and simple.
           </p>
         </div>
 
-        {/* Testimonial Carousel */}
-        <div className="mt-4 md:mt-6 flex-shrink-0">
-          <div className="relative h-28 md:h-32">
+        {/* Testimonial */}
+        <div className="mt-2">
+          <div className="relative h-32">
             <AnimatePresence mode="wait">
               <motion.div
                 key={testimonials[index].id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4 }}
-                className="bg-[#1A1C20] rounded-xl p-3 md:p-4 shadow"
+                transition={{ duration: 0.35 }}
+                className="bg-[#cc5400] p-5 rounded-xl shadow-lg"
               >
-                <h3 className="font-semibold text-sm md:text-base">
+                <h3 className="font-semibold text-base">
                   {testimonials[index].title}
                 </h3>
-                <p className="text-xs md:text-sm mt-1 opacity-80">
+                <p className="text-sm mt-1 opacity-80">
                   {testimonials[index].text}
                 </p>
-                <p className="text-[10px] md:text-xs mt-1 font-medium">
+                <p className="text-xs mt-2 font-medium">
                   {testimonials[index].author}
                 </p>
-                <p className="text-yellow-400 text-xs md:text-sm">
+                <p className="text-yellow-400 text-sm">
                   {"★★★★★".slice(0, testimonials[index].stars)}
                 </p>
               </motion.div>
@@ -129,13 +131,13 @@ export default function FlipzyOnboardingPage() {
           </div>
 
           {/* Dots */}
-          <div className="flex items-center gap-1 mt-2">
+          <div className="flex gap-1 mt-8">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setIndex(i)}
-                className={`h-2 w-2 rounded-full transition-all ${
-                  index === i ? "bg-white w-3" : "bg-gray-500"
+                className={`h-2.5 w-2.5 rounded-full ${
+                  index === i ? "bg-white" : "bg-gray-500"
                 }`}
               />
             ))}
@@ -143,48 +145,55 @@ export default function FlipzyOnboardingPage() {
         </div>
       </div>
 
-      {/* RIGHT LIGHT PANEL */}
-      <div className="w-full md:w-3/5 bg-white flex flex-col items-center justify-center p-4 md:p-6 h-auto md:h-screen">
-        <div className="w-full max-w-md h-full flex flex-col justify-center">
-          <h2 className="text-lg md:text-xl font-semibold text-[#0F1115] mb-4 text-center">
+      {/* RIGHT WHITE PANEL */}
+      <div className="w-full md:w-3/5 bg-white flex flex-col items-center justify-center">
+        <div className="w-full max-w-md h-auto md:h-[90vh] md:border-1 rounded-3xl p-10 justify-evenly">
+          <h2 className="text-2xl font-semibold text-center text-[#0F1115] mb-6">
             Let’s get started
           </h2>
-          <form className="space-y-2 md:space-y-3 flex-1 flex flex-col justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+
+          {/* FORM */}
+          <form className="space-y-4 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
-                className="input p-2 md:p-3 rounded border"
+                className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
                 placeholder="First name"
               />
               <input
-                className="input p-2 md:p-3 rounded border"
+                className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
                 placeholder="Last name"
               />
             </div>
+
             <input
               type="email"
-              className="input p-2 md:p-3 rounded border"
-              placeholder="Email"
+              className="border rounded-lg p-3 w-full text-sm focus:ring-2 focus:ring-black/20 outline-none"
+              placeholder="Email address"
             />
-            <select className="input p-2 md:p-3 rounded border w-full">
+
+            <select className="border rounded-lg p-3 w-full text-sm focus:ring-2 focus:ring-black/20 outline-none">
+              <option>Select State of Residence</option>
               {nigeriaStates.map((state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
+                <option key={state}>{state}</option>
               ))}
             </select>
-            <input
-              className="input p-2 md:p-3 rounded border"
-              placeholder="+234 813 000 0000"
-            />
-            <input
-              type="password"
-              className="input p-2 md:p-3 rounded border"
-              placeholder="Password"
-            />
+
+            <div className="w-full flex flex-col gap-4 justify-between">
+              <input
+                className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
+                placeholder="+234 813 000 0000"
+              />
+
+              <input
+                type="password"
+                className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
+                placeholder="Password"
+              />
+            </div>
 
             <button
               type="submit"
-              className="w-full bg-[#0F1115] text-white py-2 md:py-3 rounded font-semibold hover:bg-black transition"
+              className="w-full bg-[#cc5400] text-white py-3 rounded-lg font-semibold mt-2 hover:bg-black transition"
             >
               GET STARTED →
             </button>
