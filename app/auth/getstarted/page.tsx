@@ -1,227 +1,196 @@
 "use client";
-import { useRouter } from "next/navigation";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import axios from "axios";
-import Image from "next/image";
-import security from "../../../public/images/secutity1.jpg";
-import logo from "../../../public/images/logo.jpg";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function AuthPage() {
-  const router = useRouter();
-  const [isLogin, setIsLogin] = useState(false);
+const testimonials = [
+  {
+    id: 1,
+    title: "I barely had to do anything",
+    text: "The experience was smooth. Everything was handled perfectly, and I barely had to lift a finger. Highly recommended!",
+    author: "Catherine Johns",
+    stars: 5,
+  },
+  {
+    id: 2,
+    title: "Super easy and fast",
+    text: "My setup was done in no time. Flipzy made the whole process effortless.",
+    author: "Daniel Okoro",
+    stars: 5,
+  },
+  {
+    id: 3,
+    title: "Reliable every step",
+    text: "Clear instructions and quick support. I loved how seamless it all felt.",
+    author: "Fatima Bello",
+    stars: 5,
+  },
+];
 
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+const nigeriaStates = [
+  "Abia",
+  "Adamawa",
+  "Akwa Ibom",
+  "Anambra",
+  "Bauchi",
+  "Bayelsa",
+  "Benue",
+  "Borno",
+  "Cross River",
+  "Delta",
+  "Ebonyi",
+  "Edo",
+  "Ekiti",
+  "Enugu",
+  "Gombe",
+  "Imo",
+  "Jigawa",
+  "Kaduna",
+  "Kano",
+  "Katsina",
+  "Kebbi",
+  "Kogi",
+  "Kwara",
+  "Lagos",
+  "Nasarawa",
+  "Niger",
+  "Ogun",
+  "Ondo",
+  "Osun",
+  "Oyo",
+  "Plateau",
+  "Rivers",
+  "Sokoto",
+  "Taraba",
+  "Yobe",
+  "Zamfara",
+  "FCT",
+];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+export default function FlipzyOnboardingPage() {
+  const [index, setIndex] = useState(0);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      if (isLogin) {
-        const res = await axios.post(
-          "https://chef-chiller-node.onrender.com/user/login",
-          {
-            email: form.email,
-            password: form.password,
-          }
-        );
-
-        console.log("Login success:", res.data);
-
-        // Redirect to dashboard
-        router.push("/user/dashboard");
-      } else {
-        if (form.password !== form.confirmPassword) {
-          setError("Passwords do not match!");
-          setLoading(false);
-          return;
-        }
-
-        const res = await axios.post(
-          "https://chef-chiller-node.onrender.com/user/register",
-          {
-            fullName: form.fullName,
-            email: form.email,
-            password: form.password,
-          }
-        );
-
-        console.log("Signup success:", res.data);
-
-        // Redirect to dashboard
-        router.push("/user/dashboard");
-      }
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Something went wrong!");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const auto = setInterval(
+      () => setIndex((prev) => (prev + 1) % testimonials.length),
+      3500
+    );
+    return () => clearInterval(auto);
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-flipzy-dark to-black px-4 py-12">
-      <motion.div
-        className="bg-[#0f0f0f] w-full max-w-4xl rounded-3xl shadow-xl flex flex-col md:flex-row overflow-hidden"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* LEFT INFO */}
-        <div className="md:w-1/2 relative p-10 flex flex-col justify-center text-center md:text-left">
-          {/* BACKGROUND IMAGE */}
-          <div className="absolute inset-0">
-            <Image
-              src={security}
-              alt="Security Illustration"
-              className="object-cover w-full h-full opacity-40 rounded-3xl"
-              priority
-              fill
-            />
-            <div className="absolute inset-0  rounded-3xl"></div>{" "}
-            {/* optional color overlay */}
+    <div className="w-full min-h-screen flex flex-col md:flex-row">
+      {/* LEFT DARK PANEL */}
+      <div className="w-full md:w-2/5 bg-[#0F1115] text-white flex flex-col justify-between px-6 py-4 md:py-6 h-auto md:h-screen">
+        {/* Logo */}
+        <div className="text-2xl font-bold mb-2 md:mb-4">FLIPZY</div>
+
+        {/* Heading */}
+        <div className="flex-1 md:flex-shrink md:flex md:flex-col md:justify-center">
+          <h1 className="text-2xl md:text-3xl font-bold leading-snug md:leading-tight">
+            Let’s setup
+            <br />
+            your Operating
+            <br />
+            Agreement
+          </h1>
+          <p className="mt-2 text-gray-300 text-xs md:text-sm max-w-xs">
+            All-in-one solution for your business formation. Start from scratch
+            or onboard your existing company with ease.
+          </p>
+        </div>
+
+        {/* Testimonial Carousel */}
+        <div className="mt-4 md:mt-6 flex-shrink-0">
+          <div className="relative h-28 md:h-32">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonials[index].id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="bg-[#1A1C20] rounded-xl p-3 md:p-4 shadow"
+              >
+                <h3 className="font-semibold text-sm md:text-base">
+                  {testimonials[index].title}
+                </h3>
+                <p className="text-xs md:text-sm mt-1 opacity-80">
+                  {testimonials[index].text}
+                </p>
+                <p className="text-[10px] md:text-xs mt-1 font-medium">
+                  {testimonials[index].author}
+                </p>
+                <p className="text-yellow-400 text-xs md:text-sm">
+                  {"★★★★★".slice(0, testimonials[index].stars)}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* TEXT CONTENT */}
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            {isLogin ? "Welcome Back!" : "Join Flipzy Today!"}
-          </motion.h2>
-
-          <motion.p
-            className="text-white/90 mb-6 text-sm md:text-base relative z-10"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {isLogin
-              ? "Sign in to access your accounts and manage your finances effortlessly."
-              : "Sign up to start your journey with Flipzy and experience seamless banking."}
-          </motion.p>
-
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="mt-auto bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-white/90 transition relative z-10"
-          >
-            {isLogin ? "Create Account" : "Already have an account?"}
-          </button>
-        </div>
-
-        {/* RIGHT FORM */}
-        <div className="md:w-1/2 p-10 flex flex-col justify-center">
-          <motion.h3
-            className="text-2xl font-semibold text-white mb-6 text-center md:text-left"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {isLogin ? "Login" : "Sign Up"}
-          </motion.h3>
-
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            {!isLogin && (
-              <motion.input
-                type="text"
-                name="fullName"
-                placeholder="Full Name"
-                value={form.fullName}
-                onChange={handleChange}
-                className="w-full bg-[#1a1a1a] border border-white/20 text-white px-4 py-3 rounded-xl focus:border-flipzy-orange outline-none transition"
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                required
+          {/* Dots */}
+          <div className="flex items-center gap-1 mt-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-2 w-2 rounded-full transition-all ${
+                  index === i ? "bg-white w-3" : "bg-gray-500"
+                }`}
               />
-            )}
+            ))}
+          </div>
+        </div>
+      </div>
 
-            <motion.input
+      {/* RIGHT LIGHT PANEL */}
+      <div className="w-full md:w-3/5 bg-white flex flex-col items-center justify-center p-4 md:p-6 h-auto md:h-screen">
+        <div className="w-full max-w-md h-full flex flex-col justify-center">
+          <h2 className="text-lg md:text-xl font-semibold text-[#0F1115] mb-4 text-center">
+            Let’s get started
+          </h2>
+          <form className="space-y-2 md:space-y-3 flex-1 flex flex-col justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <input
+                className="input p-2 md:p-3 rounded border"
+                placeholder="First name"
+              />
+              <input
+                className="input p-2 md:p-3 rounded border"
+                placeholder="Last name"
+              />
+            </div>
+            <input
               type="email"
-              name="email"
+              className="input p-2 md:p-3 rounded border"
               placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full bg-[#1a1a1a] border border-white/20 text-white px-4 py-3 rounded-xl focus:border-flipzy-orange outline-none transition"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              required
             />
-
-            <motion.input
+            <select className="input p-2 md:p-3 rounded border w-full">
+              {nigeriaStates.map((state) => (
+                <option key={state} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
+            <input
+              className="input p-2 md:p-3 rounded border"
+              placeholder="+234 813 000 0000"
+            />
+            <input
               type="password"
-              name="password"
+              className="input p-2 md:p-3 rounded border"
               placeholder="Password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full bg-[#1a1a1a] border border-white/20 text-white px-4 py-3 rounded-xl focus:border-flipzy-orange outline-none transition"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              required
             />
 
-            {!isLogin && (
-              <motion.input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                className="w-full bg-[#1a1a1a] border border-white/20 text-white px-4 py-3 rounded-xl focus:border-flipzy-orange outline-none transition"
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                required
-              />
-            )}
-
-            {error && (
-              <p className="text-red-500 text-sm mt-1 text-center md:text-left">
-                {error}
-              </p>
-            )}
-
-            <motion.button
+            <button
               type="submit"
-              disabled={loading}
-              className="w-full bg-flipzy-orange text-black font-semibold py-3 rounded-full mt-4 hover:bg-orange-500 transition disabled:opacity-60 disabled:cursor-not-allowed"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              className="w-full bg-[#0F1115] text-white py-2 md:py-3 rounded font-semibold hover:bg-black transition"
             >
-              {loading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
-            </motion.button>
+              GET STARTED →
+            </button>
           </form>
-
-          <motion.p
-            className="text-white/50 text-xs mt-4 text-center md:text-left"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-          >
-            {isLogin
-              ? "Forgot your password?"
-              : "By signing up, you agree to our Terms & Privacy Policy."}
-          </motion.p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
