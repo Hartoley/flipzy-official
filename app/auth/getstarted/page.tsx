@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Eye, EyeOff } from "lucide-react"; // 👈 using lucide icons
 
 const testimonials = [
   {
@@ -69,6 +70,7 @@ const nigeriaStates = [
 
 export default function FlipzyOnboardingPage() {
   const [index, setIndex] = useState(0);
+  const [passwordVisible, setPasswordVisible] = useState(false); // 👈 toggle
 
   useEffect(() => {
     const auto = setInterval(
@@ -82,12 +84,10 @@ export default function FlipzyOnboardingPage() {
     <div className="w-full min-h-screen flex flex-col md:flex-row bg-[#E8ECF3]">
       {/* LEFT DARK PANEL */}
       <div className="w-full md:w-2/5 bg-[#0F1115] text-white flex flex-col justify-between px-8 py-3 md:py-14 rounded-r-3xl shadow-xl">
-        {/* Logo */}
         <div className="text-xl font-bold text-[#cc5400] tracking-wide">
           FLIPZY
         </div>
 
-        {/* Heading + Text */}
         <div className="flex-1 flex flex-col justify-center max-w-xs mt-2 md:mt-0">
           <h1 className="text-3xl md:text-4xl font-bold leading-tight">
             Let’s set up
@@ -102,7 +102,6 @@ export default function FlipzyOnboardingPage() {
           </p>
         </div>
 
-        {/* Testimonial */}
         <div className="mt-2">
           <div className="relative h-32">
             <AnimatePresence mode="wait">
@@ -130,7 +129,6 @@ export default function FlipzyOnboardingPage() {
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
           <div className="flex gap-1 mt-8">
             {testimonials.map((_, i) => (
               <button
@@ -147,13 +145,12 @@ export default function FlipzyOnboardingPage() {
 
       {/* RIGHT WHITE PANEL */}
       <div className="w-full md:w-3/5 bg-white flex flex-col items-center justify-center">
-        <div className="w-full max-w-md h-auto md:h-[90vh] md:border-1 rounded-3xl p-10 justify-evenly">
+        <div className="w-full max-w-md h-auto md:h-[90vh] rounded-3xl p-10 justify-evenly">
           <h2 className="text-2xl font-semibold text-center text-[#0F1115] mb-6">
             Let’s get started
           </h2>
 
-          {/* FORM */}
-          <form className="space-y-4 ">
+          <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
@@ -178,17 +175,28 @@ export default function FlipzyOnboardingPage() {
               ))}
             </select>
 
-            <div className="w-full flex flex-col gap-4 justify-between">
+            <div className="w-full flex flex-col gap-4">
               <input
                 className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
                 placeholder="+234 813 000 0000"
               />
 
-              <input
-                type="password"
-                className="border rounded-lg p-3 text-sm focus:ring-2 focus:ring-black/20 outline-none"
-                placeholder="Password"
-              />
+              {/* PASSWORD WITH EYE TOGGLE */}
+              <div className="relative">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  className="border rounded-lg p-3 text-sm w-full focus:ring-2 focus:ring-black/20 outline-none"
+                  placeholder="Password"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+                >
+                  {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <button
