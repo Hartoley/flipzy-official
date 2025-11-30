@@ -32,7 +32,7 @@ export default function OnboardingContainer() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 flex flex-col items-center justify-center">
+    <div className="w-full py-6 px-0 flex flex-col items-center justify-center">
       <div className="mb-6">
         {/* Flow indicator */}
         <div className="flex items-center justify-between text-xs">
@@ -44,7 +44,7 @@ export default function OnboardingContainer() {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow">
+      <div className="bg-white w-[70%] self-center p-6 rounded-xl shadow">
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div key="s1" {...stepMotion}>

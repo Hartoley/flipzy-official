@@ -59,7 +59,10 @@ export default function FlipzyOnboardingPage() {
     <div className="w-full min-h-screen flex flex-col md:flex-row bg-[#E8ECF3]">
       {/* LEFT PANEL (unchanged) */}
       <div className="w-full md:w-2/5 bg-[#0F1115] text-white px-8 py-8 rounded-r-3xl flex flex-col justify-between shadow-xl">
-        <div className="text-xl font-bold text-[#cc5400]">FLIPZY</div>
+        <div className="text-xl font-bold text-[#cc5400] flex gap-1 items-center ">
+          <img src="../images/logo.png" className="w-14" alt="" />
+          <span>FLIPZY</span>
+        </div>
 
         <div className="flex-1 flex flex-col justify-center mt-6">
           <h1 className="text-3xl font-bold leading-tight">
@@ -68,7 +71,7 @@ export default function FlipzyOnboardingPage() {
             Flipzy Account
           </h1>
           <p className="mt-3 text-gray-300 text-sm">
-            Fast Nigerian digital banking — secure, simple & verified.
+            Fast Nigerian digital banking secure, simple & verified.
           </p>
         </div>
 
