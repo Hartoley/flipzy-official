@@ -1,6 +1,6 @@
 // src/components/steps/StepIdentity.jsx
 import React, { useState } from "react";
-import { verifyBVN, verifyNIN } from "@/lib/api";
+import { initiateBVN, verifyNIN } from "@/lib/api";
 import { validBvnOrNin } from "@/lib/validators";
 
 export default function StepIdentity({ phone, onSuccess, onBack }) {
@@ -18,13 +18,27 @@ export default function StepIdentity({ phone, onSuccess, onBack }) {
     setErr(null);
 
     try {
-      let res;
-
+      // ✅ BVN MUST REDIRECT
       if (mode === "bvn") {
-        res = await verifyBVN({ phone, bvn: value });
-      } else {
-        res = await verifyNIN({ phone, nin: value });
+        const res = await initiateBVN({
+          phone,
+          bvn: value,
+          firstname: "Test",
+          lastname: "User",
+        });
+
+        if (!res.ok) {
+          setLoading(false);
+          return setErr(res.error || "BVN initiation failed");
+        }
+
+        // ✅ REDIRECT TO FLUTTERWAVE
+        window.location.href = res.data.meta.authorization.redirect;
+        return;
       }
+
+      // ✅ NIN is still one-step
+      const res = await verifyNIN({ phone, nin: value });
 
       setLoading(false);
 
@@ -36,6 +50,7 @@ export default function StepIdentity({ phone, onSuccess, onBack }) {
         mode,
       });
     } catch (e) {
+      console.error(e);
       setLoading(false);
       setErr("Network error");
     }
