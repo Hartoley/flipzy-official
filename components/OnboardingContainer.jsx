@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import StepEmail from "./steps/StepEmail";
 import StepIdentity from "./steps/StepIdentity";
 import StepPassword from "./steps/StepPassword";
@@ -8,6 +10,21 @@ export default function OnboardingContainer() {
   const [step, setStep] = useState(1);
   const [emailData, setEmailData] = useState(null); // { email, sessionId }
   const [identityData, setIdentityData] = useState(null); // { ninBvn, identity }
+
+  useEffect(() => {
+    const bvn = sessionStorage.getItem("bvnResult");
+
+    if (bvn) {
+      const parsed = JSON.parse(bvn);
+
+      setIdentityData({
+        ninBvn: parsed.bvn,
+        identity: parsed,
+      });
+
+      setStep(3); // 👉 StepPassword
+    }
+  }, []);
 
   const handleEmailSuccess = (data) => {
     setEmailData(data);

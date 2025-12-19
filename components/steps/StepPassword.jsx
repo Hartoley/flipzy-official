@@ -1,11 +1,14 @@
 // src/components/steps/StepPassword.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createAccount } from "@/lib/api";
 import { validEmail, validPassword } from "@/lib/validators";
 import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function StepPassword({ prefill, onSuccess, onBack }) {
   // prefill: { phone, identity: { firstName, lastName, dob }, ninBvn, sessionId }
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -14,26 +17,69 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
 
   const emailOk = validEmail(email);
   const pwOk = validPassword(password);
+  const [identity, setIdentity] = useState({});
+
+  // On mount, fetch BVN/NIN data from sessionStorage
+  useEffect(() => {
+    const savedEmail = sessionStorage.getItem("email");
+    const savedPassword = sessionStorage.getItem("password"); // optional if user typed it before
+
+    if (savedEmail) setEmail(savedEmail);
+    if (savedPassword) setPassword(savedPassword);
+
+    // also fetch BVN/NIN if already saved
+    const bvnResult = sessionStorage.getItem("bvnResult");
+    if (bvnResult) {
+      const parsed = JSON.parse(bvnResult);
+      setIdentity({
+        firstName: parsed.first_name,
+        lastName: parsed.last_name,
+        dob: parsed.dob || "",
+        bvn: parsed.bvn,
+      });
+    }
+  }, []);
 
   const handleCreate = async () => {
-    if (!emailOk || !pwOk) return;
+    if (!validEmail(email) || !validPassword(password)) return;
+
     setLoading(true);
     setErr(null);
+
     try {
       const payload = {
-        phone: prefill.phone,
-        ninBvn: prefill.ninBvn,
-        firstName: prefill.identity?.firstName,
-        lastName: prefill.identity?.lastName,
-        dob: prefill.identity?.dob,
+        phone: identity.phone || "",
+        ninBvn: identity.bvn,
+        firstName: identity.firstName,
+        lastName: identity.lastName,
+        dob: identity.dob,
         email,
         password,
       };
+
       const res = await createAccount(payload);
       setLoading(false);
+
       if (!res.ok) return setErr(res.error || "Unable to create account");
-      onSuccess(res.data);
+
+      // ✅ Clear temporary BVN/NIN data
+      sessionStorage.removeItem("bvnResult");
+
+      // ✅ Store session data for logged-in user
+      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("password", password); // optional
+      sessionStorage.setItem("token", res.token);
+      sessionStorage.setItem("userId", res.userId);
+
+      // Call success callback
+      onSuccess({
+        userId: res.userId,
+        token: res.token,
+      });
+
+      router.push("/dashboard");
     } catch (e) {
+      console.error(e);
       setLoading(false);
       setErr("Network error");
     }

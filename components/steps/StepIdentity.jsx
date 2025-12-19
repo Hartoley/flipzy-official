@@ -32,8 +32,16 @@ export default function StepIdentity({ phone, onSuccess, onBack }) {
           return setErr(res.error || "BVN initiation failed");
         }
 
-        // ✅ REDIRECT TO FLUTTERWAVE
-        window.location.href = res.data.meta.authorization.redirect;
+        const redirectUrl =
+          res.data?.meta?.authorization?.redirect ||
+          res.data?.data?.redirect_url;
+
+        if (!redirectUrl) {
+          setLoading(false);
+          return setErr("Unable to get redirect URL");
+        }
+
+        window.location.href = redirectUrl;
         return;
       }
 

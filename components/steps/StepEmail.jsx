@@ -49,6 +49,10 @@ export default function StepEmail({ onSuccess }) {
 
       if (!res.ok) return setErr(res.error || "Invalid OTP");
 
+      // ✅ Save email and sessionId in sessionStorage for the next step
+      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("emailSessionId", sessionId);
+
       onSuccess({ email, sessionId });
     } catch (e) {
       setLoading(false);
