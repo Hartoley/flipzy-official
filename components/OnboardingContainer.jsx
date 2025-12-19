@@ -5,11 +5,13 @@ import StepEmail from "./steps/StepEmail";
 import StepIdentity from "./steps/StepIdentity";
 import StepPassword from "./steps/StepPassword";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function OnboardingContainer() {
   const [step, setStep] = useState(1);
   const [emailData, setEmailData] = useState(null); // { email, sessionId }
   const [identityData, setIdentityData] = useState(null); // { ninBvn, identity }
+  const router = useRouter();
 
   useEffect(() => {
     const bvn = sessionStorage.getItem("bvnResult");
@@ -91,6 +93,18 @@ export default function OnboardingContainer() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-500">
+            Already have an account?{" "}
+            <button
+              onClick={() => router.push("/login")}
+              className="text-orange-600 font-semibold hover:underline"
+            >
+              Log in
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
