@@ -25,6 +25,12 @@
   }
 }
 
+.skewed {
+  transform: skewY(10deg); /* slant along Y-axis */
+  /* optional to fix content inside */
+  display: inline-block;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

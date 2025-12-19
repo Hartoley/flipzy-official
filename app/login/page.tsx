@@ -70,7 +70,12 @@ export default function LoginPage() {
       {/* Outer Card */}
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border-2 border-white">
         {/* LEFT – Showcase */}
-        <div className="relative hidden md:flex items-center justify-center bg-gradient-to-br from-blue-800 to-indigo-900">
+        <div
+          style={{
+            clipPath: "polygon(0 0, 92% 0, 100% 100%, 0% 100%)",
+          }}
+          className="relative hidden md:flex items-center justify-center "
+        >
           <Image
             src="/images/background1.jpg" // replace with banking-related image
             alt="Flipzy Banking"
