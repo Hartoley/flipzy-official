@@ -4,6 +4,7 @@ import { createAccount } from "@/lib/api";
 import { validEmail, validPassword } from "@/lib/validators";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/toast/ToastContext";
 
 export default function StepPassword({ prefill, onSuccess, onBack }) {
   // prefill: { phone, identity: { firstName, lastName, dob }, ninBvn, sessionId }
@@ -11,6 +12,8 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const { showToast } = useToast();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
@@ -48,7 +51,7 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
 
     try {
       const payload = {
-        phone: identity.phone || "",
+        phone,
         ninBvn: identity.bvn,
         firstName: identity.firstName,
         lastName: identity.lastName,
@@ -60,16 +63,31 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
       const res = await createAccount(payload);
       setLoading(false);
 
-      if (!res.ok) return setErr(res.error || "Unable to create account");
+      if (!res.ok) {
+        showToast({
+          type: "error",
+          title: "Account creation failed",
+          message: res.error || "Please try again",
+        });
+        return;
+      }
 
       // ✅ Clear temporary BVN/NIN data
       sessionStorage.removeItem("bvnResult");
 
-      // ✅ Store session data for logged-in user
+      // ✅ Store session data
       sessionStorage.setItem("email", email);
-      sessionStorage.setItem("password", password); // optional
+      // sessionStorage.setItem("password", password);
       sessionStorage.setItem("token", res.token);
       sessionStorage.setItem("userId", res.userId);
+
+      // 🔔 SUCCESS TOAST (HERE 👇)
+      showToast({
+        type: "success",
+        title: "Account created successfully 🎉",
+        message: "Welcome to Flipzy. Redirecting to dashboard...",
+        duration: 2500,
+      });
 
       // Call success callback
       onSuccess({
@@ -77,11 +95,19 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
         token: res.token,
       });
 
-      router.push("/dashboard");
+      // ⏳ Small delay so user sees toast
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2500);
     } catch (e) {
       console.error(e);
       setLoading(false);
-      setErr("Network error");
+
+      showToast({
+        type: "error",
+        title: "Network error",
+        message: "Please check your connection and try again",
+      });
     }
   };
 
@@ -104,6 +130,14 @@ export default function StepPassword({ prefill, onSuccess, onBack }) {
         onChange={(e) => setEmail(e.target.value)}
         className="w-full border rounded-lg p-3"
         placeholder="you@example.com"
+      />
+
+      <label className="text-sm font-medium">Phone number</label>
+      <input
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder="e.g. +234 803 000 0000 or 08030000000"
+        className="w-full border rounded-lg p-3"
       />
 
       <label className="text-sm font-medium">Password</label>

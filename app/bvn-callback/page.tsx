@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { retrieveBVN } from "@/lib/api";
-import { Loader2 } from "lucide-react"; // spinner icon
+import { Loader2 } from "lucide-react";
+
+export const dynamic = "force-dynamic";
 
 export default function BvnCallback() {
   const params = useSearchParams();
   const router = useRouter();
-  const [err, setErr] = useState(null);
+
+  const [err, setErr] = useState(null as string | null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,12 +23,12 @@ export default function BvnCallback() {
       return;
     }
 
-    async function verifyBVN() {
+    const verifyBVN = async () => {
       try {
         const res = await retrieveBVN(reference);
 
-        if (!res.ok) {
-          setErr(res.error || "BVN verification failed");
+        if (!res?.ok) {
+          setErr(res?.error || "BVN verification failed");
           setLoading(false);
           return;
         }
@@ -36,24 +39,21 @@ export default function BvnCallback() {
           return;
         }
 
-        // Save BVN result
         sessionStorage.setItem("bvnResult", JSON.stringify(res.data));
-
-        // Redirect back to onboarding
         router.replace("/onboarding");
-      } catch (error) {
-        console.error("BVN ERROR:", error);
+      } catch (e) {
+        console.error("BVN ERROR:", e);
         setErr("Network error");
         setLoading(false);
       }
-    }
+    };
 
     verifyBVN();
   }, [params, router]);
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center gap-4 max-w-md w-full text-center animate-fade-in">
+    <div className="h-screen w-full flex items-center justify-center bg-gray-50 px-4">
+      <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center gap-4 max-w-md w-full text-center">
         {loading && !err && (
           <>
             <Loader2 className="animate-spin w-12 h-12 text-[#cc5400]" />
@@ -70,7 +70,7 @@ export default function BvnCallback() {
           <>
             <p className="text-red-500 text-lg font-semibold">{err}</p>
             <button
-              className="mt-4 px-6 py-2 bg-[#cc5400] text-white rounded-lg font-medium hover:bg-[#b04800] transition"
+              className="mt-4 px-6 py-2 bg-[#cc5400] text-white rounded-lg"
               onClick={() => router.replace("/onboarding")}
             >
               Go Back
