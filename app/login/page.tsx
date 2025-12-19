@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useToast } from "@/components/toast/ToastContext";
+import { loginAccount } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,12 +13,53 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      showToast({
+        type: "error",
+        title: "Validation Error",
+        message: "Please enter email and password",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
-      console.log("Logging in:", { email, password });
+      const res = await loginAccount({ email, password });
+
+      if (!res.ok) {
+        showToast({
+          type: "error",
+          title: "Login Failed",
+          message: res.error || "Invalid credentials",
+        });
+        return;
+      }
+
+      // Destructure directly from res (JS, no types)
+      const { userId, token, fullName } = res;
+
+      // ✅ Success toast
+      showToast({
+        type: "success",
+        title: "Login Successful",
+        message: `Welcome back, ${fullName}`,
+      });
+
+      // Save session
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+
       router.push("/dashboard");
+    } catch (err) {
+      console.error(err);
+      showToast({
+        type: "error",
+        title: "Error",
+        message: "Something went wrong. Please try again.",
+      });
     } finally {
       setLoading(false);
     }
