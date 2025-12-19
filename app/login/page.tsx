@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      console.log("Logging in:", { phone, password });
+      console.log("Logging in:", { email, password });
       router.push("/dashboard");
     } finally {
       setLoading(false);
@@ -23,35 +23,35 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#020a14] flex items-center justify-center px-4">
       {/* Outer Card */}
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border-2 border-white">
         {/* LEFT – Showcase */}
-        <div className="relative hidden md:flex items-center justify-center bg-black">
+        <div className="relative hidden md:flex items-center justify-center bg-gradient-to-br from-blue-800 to-indigo-900">
           <Image
-            src="/images/background1.jpg" // replace with your image
-            alt="Showcase"
+            src="/images/background1.jpg" // replace with banking-related image
+            alt="Flipzy Banking"
             fill
             className="object-cover opacity-90"
           />
 
-          {/* Overlay content */}
-          <div className="absolute inset-0 bg-black/40" />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30" />
 
-          <div className="relative z-10 text-white p-8">
-            <h2 className="text-2xl font-semibold mb-2">Selected Works</h2>
-            <p className="text-sm text-gray-200 max-w-xs">
-              Discover creative designs and experiences crafted by
-              professionals.
+          <div className="relative z-10 text-white p-8 max-w-xs">
+            <h2 className="text-2xl font-semibold mb-2">Secure Banking</h2>
+            <p className="text-sm text-gray-200 mb-4">
+              Access your Flipzy account, check balances, transfer funds, and
+              manage your finances with ease.
             </p>
 
-            <div className="mt-8 flex items-center gap-3">
+            <div className="mt-6 flex items-center gap-3">
               <div className="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center font-bold">
-                A
+                F
               </div>
               <div>
-                <p className="text-sm font-semibold">Andrew.UI</p>
-                <p className="text-xs text-gray-300">UI & Illustration</p>
+                <p className="text-sm font-semibold">Flipzy</p>
+                <p className="text-xs text-gray-300">Smart Banking App</p>
               </div>
             </div>
           </div>
@@ -60,21 +60,23 @@ export default function LoginPage() {
         {/* RIGHT – Login */}
         <div className="p-8 md:p-12 flex flex-col justify-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-1">
-            Hi, Welcome Back
+            Welcome Back to Flipzy
           </h1>
-          <p className="text-gray-500 mb-8">Enter your details to login</p>
+          <p className="text-gray-500 mb-8">
+            Sign in to manage your account securely
+          </p>
 
-          {/* Phone */}
+          {/* Email */}
           <div className="mb-4">
             <label className="block text-sm text-gray-600 mb-1">
-              Phone Number
+              Email Address
             </label>
             <input
-              type="tel"
-              placeholder="+234 8012345678"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-orange-300 focus:outline-none"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-300 focus:outline-none"
             />
           </div>
 
@@ -86,7 +88,7 @@ export default function LoginPage() {
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-orange-300 focus:outline-none pr-12"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-300 focus:outline-none pr-12"
             />
             <button
               type="button"
@@ -97,7 +99,7 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* Forgot */}
+          {/* Forgot Password */}
           <div className="text-right mb-6">
             <button
               onClick={() => router.push("/forgot-password")}
@@ -123,7 +125,7 @@ export default function LoginPage() {
               onClick={() => router.push("/onboarding")}
               className="text-orange-600 font-semibold hover:underline"
             >
-              Sign up
+              Create Account
             </button>
           </p>
         </div>
