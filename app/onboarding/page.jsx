@@ -85,7 +85,7 @@ export default function OnboardingPage() {
     <>
       <div className="w-full min-h-screen flex flex-col md:flex-row bg-[#E8ECF3]">
         {/* LEFT PANEL (unchanged) */}
-        <div className="w-full md:w-2/5 bg-[#0F1115] text-white px-8 py-8 rounded-r-3xl flex flex-col justify-between shadow-xl">
+        <div className="w-full md:w-2/5 bg-[#0d0f17] text-white px-8 py-8 rounded-r-3xl flex flex-col justify-between shadow-xl">
           <div className="text-xl font-bold text-[#cc5400] flex gap-1 items-center ">
             <img src="../images/logo.png" className="w-14" alt="" />
             <span>FLIPZY</span>

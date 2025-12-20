@@ -78,7 +78,7 @@ export default function LoginPage() {
       <div className="absolute inset-0 flex">
         {/* Left – 70% dark slanted */}
         <div
-          className="h-full w-[60%] bg-[#020a14]"
+          className="h-full w-[60%] bg-[#0d0f17]"
           style={{
             clipPath: "polygon(0 0, 100% 0, 85% 100%, 0% 100%)",
           }}
@@ -142,10 +142,14 @@ export default function LoginPage() {
           {/* RIGHT – Login form */}
           <div className="flex h-full w-full items-center">
             <div className="w-full px-10">
+              <div className="text-xl font-bold text-[#cc5400] mb-3 flex gap-1 items-center self-center ml-[-20] justify-center">
+                <img src="../images/logo.png" className="w-14" alt="" />
+                <span>FLIPZY</span>
+              </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-1">
                 Welcome Back
               </h1>
-              <p className="text-gray-500 mb-8">
+              <p className="text-gray-500 mb-5">
                 Sign in to manage your account
               </p>
 
