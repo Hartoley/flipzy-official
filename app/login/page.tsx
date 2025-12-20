@@ -82,7 +82,7 @@ export default function LoginPage() {
       </div>
 
       {/* ================= FOREGROUND (CONTENT) ================= */}
-      <div className="relative z-10 h-full flex items-center justify-center">
+      <div className="relative z-10 h-full flex items-center px-3 justify-center">
         {/* This container behaves EXACTLY like your old one */}
         <div
           className="
