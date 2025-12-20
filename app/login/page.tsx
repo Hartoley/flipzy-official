@@ -14,6 +14,13 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
+  interface LoginResponse {
+    ok: boolean;
+    userId: string;
+    token: string;
+    fullName: string;
+    error?: string;
+  }
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -27,7 +34,8 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const res = await loginAccount({ email, password });
+      // ✅ Use "as LoginResponse" here to tell TypeScript what the JS file returns
+      const res = (await loginAccount({ email, password })) as LoginResponse;
 
       if (!res.ok) {
         showToast({
@@ -38,10 +46,9 @@ export default function LoginPage() {
         return;
       }
 
-      // Destructure directly from res (JS, no types)
+      // ✅ Now TypeScript knows exactly what these are
       const { userId, token, fullName } = res;
 
-      // ✅ Success toast
       showToast({
         type: "success",
         title: "Login Successful",

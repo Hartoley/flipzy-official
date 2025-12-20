@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/bvn-callback/page.tsx", "app/onboarding/page.jsx", "app/login/page.tsx"  ],
+, "app/bvn-callback/page.tsx", "app/onboarding/page.jsx", "app/login/page.tsx", "lib/api.js"  ],
   "exclude": ["node_modules"]
 }
