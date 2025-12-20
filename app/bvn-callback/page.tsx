@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react"; // 1. Import Suspense
 import { useSearchParams, useRouter } from "next/navigation";
 import { retrieveBVN } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 
+// Keep this for extra safety
 export const dynamic = "force-dynamic";
 
-export default function BvnCallback() {
+// 2. Move your logic into a sub-component
+function BvnCallbackContent() {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -25,7 +27,7 @@ export default function BvnCallback() {
 
     const verifyBVN = async () => {
       try {
-        const res = await retrieveBVN(reference);
+        const res = (await retrieveBVN(reference)) as any; // Note: using 'as any' since lib is .js
 
         if (!res?.ok) {
           setErr(res?.error || "BVN verification failed");
@@ -52,32 +54,43 @@ export default function BvnCallback() {
   }, [params, router]);
 
   return (
-    <div className="h-screen w-full flex items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center gap-4 max-w-md w-full text-center">
-        {loading && !err && (
-          <>
-            <Loader2 className="animate-spin w-12 h-12 text-[#cc5400]" />
-            <p className="text-gray-700 text-lg font-medium">
-              Completing BVN verification…
-            </p>
-            <p className="text-gray-400 text-sm">
-              Please do not close this window.
-            </p>
-          </>
-        )}
+    <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center gap-4 max-w-md w-full text-center">
+      {loading && !err && (
+        <>
+          <Loader2 className="animate-spin w-12 h-12 text-[#cc5400]" />
+          <p className="text-gray-700 text-lg font-medium">
+            Completing BVN verification…
+          </p>
+          <p className="text-gray-400 text-sm">
+            Please do not close this window.
+          </p>
+        </>
+      )}
 
-        {err && (
-          <>
-            <p className="text-red-500 text-lg font-semibold">{err}</p>
-            <button
-              className="mt-4 px-6 py-2 bg-[#cc5400] text-white rounded-lg"
-              onClick={() => router.replace("/onboarding")}
-            >
-              Go Back
-            </button>
-          </>
-        )}
-      </div>
+      {err && (
+        <>
+          <p className="text-red-500 text-lg font-semibold">{err}</p>
+          <button
+            className="mt-4 px-6 py-2 bg-[#cc5400] text-white rounded-lg"
+            onClick={() => router.replace("/onboarding")}
+          >
+            Go Back
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+// 3. Export a default component wrapped in Suspense
+export default function BvnCallback() {
+  return (
+    <div className="h-screen w-full flex items-center justify-center bg-gray-50 px-4">
+      <Suspense
+        fallback={<Loader2 className="animate-spin w-12 h-12 text-[#cc5400]" />}
+      >
+        <BvnCallbackContent />
+      </Suspense>
     </div>
   );
 }
