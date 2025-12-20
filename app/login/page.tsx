@@ -189,6 +189,7 @@ export default function LoginPage() {
 
               {/* Button */}
               <button
+                onClick={handleLogin}
                 disabled={loading}
                 className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
               >
