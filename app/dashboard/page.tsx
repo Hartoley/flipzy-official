@@ -2,6 +2,7 @@ import StatsRow from "@/components/dashboard/StatsRow";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import RightPanel from "@/components/dashboard/RightPanel";
 import TransactionsList from "@/components/dashboard/TransactionsList";
+import ChartSection from "@/components/dashboard/ChartSection";
 
 export default function Page() {
   return (
@@ -11,9 +12,11 @@ export default function Page() {
         <DashboardHeader />
         <StatsRow />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6">
           <TransactionsList />
-          <div className="rounded-2xl border border-white/5 bg-[#111833]" />
+          {/* <div className="rounded-2xl border border-white/5 bg-[#111833]" /> */}
+
+          <ChartSection />
         </div>
       </main>
 
