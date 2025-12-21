@@ -2,6 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { X } from "lucide-react";
+
+type SidebarProps = {
+  onClose?: () => void;
+};
 
 const menuItems = [
   { label: "Dashboard", href: "/dashboard", icon: "🏠" },
@@ -13,14 +18,22 @@ const menuItems = [
   { label: "Settings", href: "/dashboard/settings", icon: "⚙️" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="h-screen w-[200px] bg-[#0e1325] px-4 py-6 text-white  border-r border-white/5 ">
-      {/* Logo */}
-      <div className="mb-10 flex items-center gap-2 px-2">
-        <div className="h-8 w-8 rounded-full bg-orange-500 flex items-center justify-center font-bold">
+    <aside className="h-screen w-full lg:w-[200px] bg-[#0e1325] px-4 py-6 text-white border-r border-white/5">
+      {/* Mobile header */}
+      <div className="mb-6 flex items-center justify-between lg:hidden">
+        <span className="text-lg font-semibold">Flipzy</span>
+        <button onClick={onClose}>
+          <X size={20} />
+        </button>
+      </div>
+
+      {/* Logo (desktop) */}
+      <div className="mb-10 hidden lg:flex items-center gap-2 px-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 font-bold">
           F
         </div>
         <span className="text-lg font-semibold">Flipzy</span>
@@ -35,7 +48,8 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-6 px-4 py-1 rounded-xl transition-all
+              onClick={onClose}
+              className={`flex items-center gap-6 rounded-xl px-4 py-2 transition-all
                 ${
                   isActive
                     ? "bg-orange-500 text-white shadow-lg"
