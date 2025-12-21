@@ -6,7 +6,7 @@ const tabs = ["Payments", "Pricing", "Invoices", "Sales"];
 
 export default function DashboardHeader() {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between">
       {/* ================= LEFT ================= */}
       <div className="flex items-center gap-3">
         <h1 className="text-2xl font-semibold tracking-tight">One Banking</h1>
