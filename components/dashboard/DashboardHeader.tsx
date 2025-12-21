@@ -5,6 +5,15 @@ import React from "react";
 const tabs = ["Payments", "Pricing", "Invoices", "Sales"];
 
 export default function DashboardHeader() {
+  // Get current date
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+  };
+  const formattedDate = today.toLocaleDateString("en-US", options); // e.g., "Wed, 21 Dec"
+
   return (
     <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between">
       {/* ================= LEFT ================= */}
@@ -19,7 +28,7 @@ export default function DashboardHeader() {
 
       {/* ================= CENTER (TABS) ================= */}
       <div className="flex items-center gap-6">
-        {tabs.map((tab, index) => {
+        {tabs.map((tab) => {
           const isActive = tab === "Payments";
 
           return (
@@ -47,7 +56,7 @@ export default function DashboardHeader() {
       <div className="flex items-center gap-3">
         {/* Date / Filter pill */}
         <button className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/5 px-4 py-2 text-sm text-gray-300 hover:bg-white/10">
-          <span>Wed, 16 Aug</span>
+          <span>{formattedDate}</span>
           <span className="text-xs opacity-70">▼</span>
         </button>
       </div>
