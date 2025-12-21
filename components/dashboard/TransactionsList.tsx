@@ -1,34 +1,24 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const transactions = [
-  {
-    name: "Paymenty",
-    amount: "$2,897",
-    avatar: "P",
-  },
-  {
-    name: "Pockegat",
-    amount: "$5,687",
-    avatar: "G",
-  },
-  {
-    name: "Condship",
-    amount: "$2,057",
-    avatar: "C",
-  },
-  {
-    name: "Mortly",
-    amount: "$0.00",
-    avatar: "M",
-  },
-  {
-    name: "Aniergasing",
-    amount: "$1,077",
-    avatar: "A",
-  },
+  { name: "Netflix", amount: "$12.99", avatar: "N" },
+  { name: "Starbucks", amount: "$5.75", avatar: "S" },
+  { name: "Spotify", amount: "$9.99", avatar: "S" },
+  { name: "Amazon", amount: "$120.50", avatar: "A" },
+  { name: "Uber", amount: "$23.40", avatar: "U" },
+  { name: "Apple Store", amount: "$299.00", avatar: "A" },
+  { name: "Gym Membership", amount: "$45.00", avatar: "G" },
+  { name: "Paypal Transfer", amount: "$150.00", avatar: "P" },
+  { name: "Electric Bill", amount: "$87.65", avatar: "E" },
+  { name: "Water Bill", amount: "$32.10", avatar: "W" },
 ];
 
 export default function TransactionsList() {
+  const router = useRouter();
+
   return (
     <div className="rounded-2xl border border-white/5 bg-[#111833] p-5">
       {/* ================= HEADER ================= */}
@@ -37,14 +27,17 @@ export default function TransactionsList() {
           Dashboard Analytics
         </h3>
 
-        <button className="text-xs text-gray-400 hover:text-gray-200">
+        <button
+          className="text-xs text-gray-400 hover:text-gray-200"
+          onClick={() => router.push("/transactions")}
+        >
           See all
         </button>
       </div>
 
       {/* ================= LIST ================= */}
       <div className="space-y-3">
-        {transactions.map((tx, index) => (
+        {transactions.slice(0, 4).map((tx, index) => (
           <TransactionRow key={index} {...tx} />
         ))}
       </div>
@@ -53,7 +46,6 @@ export default function TransactionsList() {
 }
 
 /* ================= ROW ================= */
-
 function TransactionRow({
   name,
   amount,
